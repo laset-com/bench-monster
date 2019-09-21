@@ -32,7 +32,6 @@ prms () {
 	echo "    $(tput setaf 3)-more$(tput sgr0)      - Speedtest from more locations"
 	echo "    $(tput setaf 3)-a$(tput sgr0)         - Test and check all above things at once"
 	echo "    $(tput setaf 3)-b$(tput sgr0)         - System info, CDN speedtest and I/O test"
-	echo "    $(tput setaf 3)-ispeed$(tput sgr0)    - Install speedtest-cli (python 2.4-3.4 required)"
 	echo "    $(tput setaf 3)-speed$(tput sgr0)     - Check internet speed using speedtest-cli"
 	echo "    $(tput setaf 3)-about$(tput sgr0)     - Check about this script"
 	echo ""
@@ -244,7 +243,7 @@ FormatBytes() {
 	bytes=${1%.*}
 	local Mbps=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 * 8 } END { if (NR == 0) { print "error" } }' )
 	if [[ $bytes -lt 1000 ]]; then
-		printf "%8i B/s |      N/A     "  $bytes
+		printf "%8i B/s |      N/A    "  $bytes
 	elif [[ $bytes -lt 1000000 ]]; then
 		local KiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 } END { if (NR == 0) { print "error" } }' )
 		printf "%7s KB/s | %7s Mbps" "$KiBs" "$Mbps"
