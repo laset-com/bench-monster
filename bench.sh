@@ -490,7 +490,7 @@ iotest () {
 		ios1=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		ios2=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		ios3=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
-		echo "   I/O Speed  $(averageio "$ios1" "$ios2" "$ios3")" | tee -a $log
+		echo "   I/O Speed  - $(averageio "$ios1" "$ios2" "$ios3") MB/s" | tee -a $log
 
 		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test oflag=dsync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Direct -$io" | tee -a $log
