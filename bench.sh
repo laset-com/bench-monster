@@ -489,7 +489,7 @@ iotest () {
 	printf "%s\n\n" "$( cpubench md5sum $writemb_cpu )" | tee -a $log
 
 	# Disk test
-	echo " Disk Speed ($writemb_size):" | tee -a $log
+	echo " Disk Speed ($writemb_size)MB:" | tee -a $log
 	if [[ $writemb != "1" ]]; then
 		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Speed  -$io" | tee -a $log
