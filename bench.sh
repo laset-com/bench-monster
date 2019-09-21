@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.1.9 beta  (21 Sep 2019)             / "
+	echo "  \               V 1.2.0 beta  (21 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -242,11 +242,11 @@ FormatBytes() {
 		printf "%8i B/s |      N/A     "  $bytes
 	elif [[ $bytes -lt 1000000 ]]; then
 		local KiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 } END { if (NR == 0) { print "error" } }' )
-		printf "%7s KiB/s | %7s Mbps" "$KiBs" "$Mbps"
+		printf "%7s KB/s | %7s Mbps" "$KiBs" "$Mbps"
 	else
 		# awk way for accuracy
 		local MiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 } END { if (NR == 0) { print "error" } }' )
-		printf "%7s MiB/s | %7s Mbps" "$MiBs" "$Mbps"
+		printf "%7s MB/s | %7s Mbps" "$MiBs" "$Mbps"
 
 		# bash way
 		# printf "%4s MiB/s | %4s Mbps""$(( bytes / 1024 / 1024 ))" "$(( bytes / 1024 / 1024 * 8 ))"
@@ -481,7 +481,7 @@ iotest () {
 	printf "%s\n" "$( cpubench bzip2 $writemb_cpu )" | tee -a $log 
 	printf "   sha256 %s -" "$writemb_size" | tee -a $log
 	printf "%s\n" "$( cpubench sha256sum $writemb_cpu )" | tee -a $log
-	printf "   md5sum %s -" "$writemb_size" | tee -a $log
+	printf "   md5sum %s -" "$writemb_size" -" "(512 / $writemb) seconds" | tee -a $log
 	printf "%s\n\n" "$( cpubench md5sum $writemb_cpu )" | tee -a $log
 
 	# Disk test
