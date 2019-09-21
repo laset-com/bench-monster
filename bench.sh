@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.0 beta  (21 Sep 2019)             / "
+	echo "  \               V 1.2.1 beta  (22 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -16,20 +16,25 @@ about () {
 
 prms () {
 	echo "  Arguments:"
-	echo "    $(tput setaf 3)-info$(tput sgr0)         - Check basic system information"
-	echo "    $(tput setaf 3)-io$(tput sgr0)           - Run I/O test with or w/ cache"
-	echo "    $(tput setaf 3)-cdn$(tput sgr0)          - Check download speed from CDN"
-	echo "    $(tput setaf 3)-northamerica$(tput sgr0) - Download speed from North America"
-	echo "    $(tput setaf 3)-southamerica$(tput sgr0) - Download speed from South America"
-	echo "    $(tput setaf 3)-europe$(tput sgr0)       - Download speed from Europe"
-	echo "    $(tput setaf 3)-ukraine$(tput sgr0)      - Download speed from Ukraine"
-	echo "    $(tput setaf 3)-asia$(tput sgr0)         - Download speed from Asia"
-	echo "    $(tput setaf 3)-more$(tput sgr0)         - Download speed from more locations"
-	echo "    $(tput setaf 3)-a$(tput sgr0)            - Test and check all above things at once"
-	echo "    $(tput setaf 3)-b$(tput sgr0)            - System info, CDN speedtest and I/O test"
-	echo "    $(tput setaf 3)-ispeed$(tput sgr0)       - Install speedtest-cli (python 2.4-3.4 required)"
-	echo "    $(tput setaf 3)-speed$(tput sgr0)        - Check internet speed using speedtest-cli"
-	echo "    $(tput setaf 3)-about$(tput sgr0)        - Check about this script"
+	echo "    $(tput setaf 3)-info$(tput sgr0)      - Check basic system information"
+	echo "    $(tput setaf 3)-io$(tput sgr0)        - Run I/O test with or w/ cache"
+	echo "    $(tput setaf 3)-cdn$(tput sgr0)       - Check download speed from CDN"
+	echo "    $(tput setaf 3)-na$(tput sgr0)        - Benchmark & Speedtest from North America"
+	echo "    $(tput setaf 3)-naspeed$(tput sgr0)   - Speedtest from North America"
+	echo "    $(tput setaf 3)-sa$(tput sgr0)        - Benchmark & Speedtest from South America"
+	echo "    $(tput setaf 3)-saspeed$(tput sgr0)   - Speedtest from South America"
+	echo "    $(tput setaf 3)-eu$(tput sgr0)        - Benchmark & Speedtest from Europe"
+	echo "    $(tput setaf 3)-euspeed$(tput sgr0)   - Speedtest from Europe"
+	echo "    $(tput setaf 3)-ua$(tput sgr0)        - Benchmark & Speedtest from Ukraine"
+	echo "    $(tput setaf 3)-uaspeed$(tput sgr0)   - Speedtest from Ukraine"
+	echo "    $(tput setaf 3)-asia$(tput sgr0)      - Benchmark & Speedtest from Asia"
+	echo "    $(tput setaf 3)-asiaspeed$(tput sgr0) - Speedtest from Asia"
+	echo "    $(tput setaf 3)-more$(tput sgr0)      - Speedtest from more locations"
+	echo "    $(tput setaf 3)-a$(tput sgr0)         - Test and check all above things at once"
+	echo "    $(tput setaf 3)-b$(tput sgr0)         - System info, CDN speedtest and I/O test"
+	echo "    $(tput setaf 3)-ispeed$(tput sgr0)    - Install speedtest-cli (python 2.4-3.4 required)"
+	echo "    $(tput setaf 3)-speed$(tput sgr0)     - Check internet speed using speedtest-cli"
+	echo "    $(tput setaf 3)-about$(tput sgr0)     - Check about this script"
 	echo ""
 	echo "  Parameters"
 	echo "    $(tput setaf 3)share$(tput sgr0)         - upload results (default to clbin)"
@@ -54,7 +59,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.1.9 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.1 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
