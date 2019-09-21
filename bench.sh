@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.1 beta  (22 Sep 2019)             / "
+	echo "  \               V 1.2.2 beta  (22 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.1 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.2 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -481,11 +481,11 @@ iotest () {
 
 	# CPU Speed test
 	printf " CPU Speed:\n" | tee -a $log
-	printf "    bzip2 %s -" "$writemb_size" | tee -a $log
+	printf "    bzip2 %s MB -" "$writemb_size" | tee -a $log
 	printf "%s\n" "$( cpubench bzip2 $writemb_cpu )" | tee -a $log 
-	printf "   sha256 %s -" "$writemb_size" | tee -a $log
+	printf "   sha256 %s MB -" "$writemb_size" | tee -a $log
 	printf "%s\n" "$( cpubench sha256sum $writemb_cpu )" | tee -a $log
-	printf "   md5sum %s -" "$writemb_size" | tee -a $log
+	printf "   md5sum %s MB -" "$writemb_size" | tee -a $log
 	printf "%s\n\n" "$( cpubench md5sum $writemb_cpu )" | tee -a $log
 
 	# Disk test
@@ -513,7 +513,7 @@ iotest () {
 	fi
 	[[ -d $benchram ]] || mkdir $benchram
 	mount -t tmpfs -o size=$sbram tmpfs $benchram/
-	printf " RAM Speed (%sB):\n" "$sbram" | tee -a $log
+	printf " RAM Speed 1024 MB:\n" "$sbram" | tee -a $log
 	iow1=$( ( dd if=/dev/zero of=$benchram/zero bs=512K count=$sbcount ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	ior1=$( ( dd if=$benchram/zero of=$NULL bs=512K count=$sbcount; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	iow2=$( ( dd if=/dev/zero of=$benchram/zero bs=512K count=$sbcount ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
