@@ -16,33 +16,33 @@ Example: `sh bench.sh -all share`
 
 `-io` # I/O Test
 
-`-cdn` # CDN Speedtest (100MB)
+`-cdn` # CDN Speedtest
 
 `-a` or `-all` # All In One Command
 
 `-b` # System Info + CDN Download + I/O Test
 
-`-na` or `-northamerica` # Benchmark & North America Speedtest (800MB)
+`-na` or `-northamerica` # Benchmark & North America Speedtest
 
-`-naspeed` # North America Speedtest (800MB)
+`-naspeed` # North America Speedtest
 
-`-sa` or `-southamerica` # Benchmark & South America Speedtest (800MB)
+`-sa` or `-southamerica` # Benchmark & South America Speedtest
 
-`-saspeed` # South America Speedtest (800MB)
+`-saspeed` # South America Speedtest
 
-`-eu` or `-europe` # Benchmark & Europe Speedtest (900MB)
+`-eu` or `-europe` # Benchmark & Europe Speedtest
 
-`-euspeed` # Europe Speedtest (900MB)
+`-euspeed` # Europe Speedtest
 
-`-ua` or `-ukraine` # Benchmark & Ukraine Speedtest (900MB)
+`-ua` or `-ukraine` # Benchmark & Ukraine Speedtest
 
-`-uaspeed` # Ukraine Speedtest (900MB)
+`-uaspeed` # Ukraine Speedtest
 
-`-asia` # Benchmark & Asia/Pacific Speedtest (400MB)
+`-asia` # Benchmark & Asia/Pacific Speedtest
 
-`-asiaspeed` # Asia/Pacific Speedtest (400MB)
+`-asiaspeed` # Asia/Pacific Speedtest
 
-`-more` # More locations Speedtest (400MB)
+`-more` # More locations Speedtest
 
 `-speed` or `-speedtest` # Test from speedtest.net using speedtest cli
 
