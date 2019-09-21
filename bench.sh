@@ -468,7 +468,7 @@ iotest () {
 	# start testing
 	writemb=$(freedisk)
 	if [[ $writemb -gt 512 ]]; then
-		writemb_size="$(( writemb / 2 / 2 ))MB"
+		writemb_size="$(( writemb / 2 / 2 ))"
 		writemb_cpu="$(( writemb / 2 ))"
 	else
 		writemb_size="$writemb"MB
@@ -481,7 +481,7 @@ iotest () {
 	printf "%s\n" "$( cpubench bzip2 $writemb_cpu )" | tee -a $log 
 	printf "   sha256 %s -" "$writemb_size" | tee -a $log
 	printf "%s\n" "$( cpubench sha256sum $writemb_cpu )" | tee -a $log
-	printf "   md5sum %s -" "$writemb_size" -" "(512 / $writemb) seconds" | tee -a $log
+	printf "   md5sum %s -" "$writemb_size" -" | tee -a $log
 	printf "%s\n\n" "$( cpubench md5sum $writemb_cpu )" | tee -a $log
 
 	# Disk test
