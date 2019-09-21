@@ -2,7 +2,7 @@
 
 ##### Download
 
-`curl -LsO raw.githubusercontent.com/laset-com/bench-monster/master/bench.sh; chmod +x bench.sh`
+`curl -LsO bench.monster/bench.sh; chmod +x bench.sh`
 
 ##### Usage
 
