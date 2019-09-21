@@ -250,7 +250,7 @@ FormatBytes() {
 	else
 		# awk way for accuracy
 		local MiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 } END { if (NR == 0) { print "error" } }' )
-		printf "%7s MB/s | %7s Mbps" "$MiBs" "$Mbps"
+		printf "%7s MiB/s | %7s Mbps" "$MiBs" "$Mbps"
 
 		# bash way
 		# printf "%4s MiB/s | %4s Mbps""$(( bytes / 1024 / 1024 ))" "$(( bytes / 1024 / 1024 * 8 ))"
