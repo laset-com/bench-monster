@@ -26,7 +26,7 @@ Example: `sh bench.sh -all share`
 
 `-naspeed` # North America Speedtest (800MB)
 
-`-sa` or `-southerica` # Benchmark & South America Speedtest (800MB)
+`-sa` or `-southamerica` # Benchmark & South America Speedtest (800MB)
 
 `-saspeed` # South America Speedtest (800MB)
 
