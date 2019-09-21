@@ -8,6 +8,7 @@ about () {
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
 	echo "  \               V 1.1.9 beta  (21 Sep 2019)             / "
+	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
 	echo ""
@@ -486,8 +487,10 @@ iotest () {
 	# Disk test
 	echo " Disk Speed ($writemb_size):" | tee -a $log
 	if [[ $writemb != "1" ]]; then
-		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
-		echo "   I/O Speed  -$io" | tee -a $log
+		ios1=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		ios2=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		ios3=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		echo "   I/O Speed  $(averageio "$ios1" "$ios2" "$ios3")" | tee -a $log
 
 		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test oflag=dsync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Direct -$io" | tee -a $log
