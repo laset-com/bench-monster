@@ -472,7 +472,7 @@ iotest () {
 	# start testing
 	writemb=$(freedisk)
 	if [[ $writemb -gt 512 ]]; then
-		writemb_size="$(( writemb / 2 / 2 ))"
+		writemb_size="$(( writemb / 2 / 2 ))MB"
 		writemb_cpu="$(( writemb / 2 ))"
 	else
 		writemb_size="$writemb"MB
@@ -481,15 +481,15 @@ iotest () {
 
 	# CPU Speed test
 	printf " CPU Speed:\n" | tee -a $log
-	printf "    bzip2 %s MB -" "$writemb_size" | tee -a $log
+	printf "    bzip2 %s -" "$writemb_size" | tee -a $log
 	printf "%s\n" "$( cpubench bzip2 $writemb_cpu )" | tee -a $log 
-	printf "   sha256 %s MB -" "$writemb_size" | tee -a $log
+	printf "   sha256 %s -" "$writemb_size" | tee -a $log
 	printf "%s\n" "$( cpubench sha256sum $writemb_cpu )" | tee -a $log
-	printf "   md5sum %s MB -" "$writemb_size" | tee -a $log
+	printf "   md5sum %s -" "$writemb_size" | tee -a $log
 	printf "%s\n\n" "$( cpubench md5sum $writemb_cpu )" | tee -a $log
 
 	# Disk test
-	echo " Disk Speed $writemb_size MB:" | tee -a $log
+	echo " Disk Speed ($writemb_size):" | tee -a $log
 	if [[ $writemb != "1" ]]; then
 		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Speed  -$io" | tee -a $log
@@ -513,7 +513,7 @@ iotest () {
 	fi
 	[[ -d $benchram ]] || mkdir $benchram
 	mount -t tmpfs -o size=$sbram tmpfs $benchram/
-	printf " RAM Speed 1024 MB:\n" "$sbram" | tee -a $log
+	printf " RAM Speed (%sB):\n" "$sbram" | tee -a $log
 	iow1=$( ( dd if=/dev/zero of=$benchram/zero bs=512K count=$sbcount ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	ior1=$( ( dd if=$benchram/zero of=$NULL bs=512K count=$sbcount; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	iow2=$( ( dd if=/dev/zero of=$benchram/zero bs=512K count=$sbcount ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
