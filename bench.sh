@@ -277,7 +277,7 @@ speed() {
 	printf "%s" " $1" | tee -a $log
 
 	# get download speed and print
-	C_DL=$( curl -m 4 -w '%{speed_download}\n' -o $NULL -s "$2" )
+	C_DL=$( curl -m 7 -w '%{speed_download}\n' -o $NULL -s "$2" )
 	printf "%s\n" "$(FormatBytes $C_DL) $(pingtest $2)" | tee -a $log
 }
 
