@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.6 beta  (22 Sep 2019)             / "
+	echo "  \               V 1.2.7 beta  (23 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.6 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.7 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -328,8 +328,9 @@ europespeedtest () {
 	speed "Germany, Frankfurt (Linode)     :" "http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin"
 	speed "Germany, Nuremberg (NetCup)     :" "http://lookingglass.netcup.net/100MB.test"
 	speed "France, Paris (Vultr)           :" "http://par-fr-ping.vultr.com/vultr.com.100MB.bin"
-	speed "Spain, Sevilla (Edis)           :" "https://es.edis.at/100MB.test"
 	speed "Spain, Madrid (M247)            :" "http://es.hosth.ink/100mb.bin"
+	speed "Spain, Sevilla (Edis)           :" "https://es.edis.at/100MB.test"
+	speed "Portugal, Porto (NOS)           :" "http://porto.speedtest.net.zon.pt/speedtest/random4000x4000.jpg"
 	speed "Denmark, Copenhagen (Interxion) :" "http://dk.hosth.ink/100mb.bin"
 	speed "Sweden, Stockholm (HostHatch)   :" "http://lg.sto.hosthatch.com/100MB.test"
 	speed "Norway, Oslo (HostHatch)        :" "http://lg.osl.hosthatch.com/100MB.test"
@@ -341,8 +342,10 @@ europespeedtest () {
 	speed "Russia, St.Petersburg (Hexcore) :" "http://92.255.99.30/100.mb"
 	speed "Lithuania, Siauliai (UltraVPS)  :" "http://lg.sqq.lt.ultravps.eu/100MB.test"
 	speed "Moldova, Chisinau (ClouDedic)   :" "http://185.153.198.20/100.mb"
+	speed "Romania, Bucharest (HostSailor) :" "http://185.183.99.8/LookingGlass/100MB.test"
 	speed "Bulgaria, Sofia (AlphaVPS)      :" "http://lgbg.alphavps.bg/100MB.test"
 	speed "Greece, Athens (Top.Host)       :" "http://speedtest.top.host/speedtest/random4000x4000.jpg"
+	speed "Turkey, Istanbul (Radore)       :" "http://speedtest.radore.com/speedtest/random4000x4000.jpg"
 	echo "" | tee -a $log
 }
 
@@ -354,8 +357,10 @@ ukrainespeedtest () {
 	speed "Ukraine, Kyiv (Ukrtelecom)       :" "http://95.47.137.63/100.mb"
 	speed "Ukraine, Kyiv (KyivStar)         :" "http://speedtest.kyivstar.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Kyiv (Volia)            :" "http://speedtest.volia.net/speedtest/random4000x4000.jpg"
-	speed "Ukraine, Lviv (Komitex)          :" "http://speedtest.komitex.net/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Kyiv (Freenet)          :" "http://sp1.o3.ua/random4000x4000.jpg"
 	speed "Ukraine, Lviv (UARnet)           :" "http://speedtest.uar.net/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Lviv (Komitex)          :" "http://speedtest.komitex.net/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Lviv (Astra)            :" "http://speedtest.astra.in.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Ivano-Frankivsk (SIM)   :" "http://speedtest.sim.if.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Uzhgorod (TransCom)     :" "http://speedtest.tcom.uz.ua/speedtest/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Ternopil (Columbus)     :" "http://speedtest.columbus.te.ua/speedtest/random4000x4000.jpg"
