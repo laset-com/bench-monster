@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.3 beta  (22 Sep 2019)             / "
+	echo "  \               V 1.2.4 beta  (22 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.3 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.4 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -297,7 +297,8 @@ northamericaspeedtest () {
 	echo "" | tee -a $log
 	speed "USA, New York (DigitalOcean) :" "http://speedtest-nyc3.digitalocean.com/100mb.test"
 	speed "USA, Washington (Softlayer)  :" "http://speedtest.wdc04.softlayer.com/downloads/test100.zip"
-	speed "USA, Chicago (Psychz)        :" "http://lg.chi.psychz.net/200MB.test"
+	speed "USA, Chicago (Vultr)         :" "http://il-us-ping.vultr.com/vultr.com.100MB.bin"
+	speed "USA, Kansas City (Joe's DC)  :" "https://lg.joesdatacenter.com/100MB.test"
 	speed "USA, Denver (Mean Servers)   :" "http://den.meanservers.com/lg/100MB.tar.gz"
 	speed "USA, Dallas (Vultr)          :" "http://tx-us-ping.vultr.com/vultr.com.100MB.bin"
 	speed "USA, Atlanta (Vultr)         :" "http://ga-us-ping.vultr.com/vultr.com.100MB.bin"
