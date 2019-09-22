@@ -243,7 +243,7 @@ FormatBytes() {
 	bytes=${1%.*}
 	local Mbps=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 * 8 } END { if (NR == 0) { print "error" } }' )
 	if [[ $bytes -lt 1000 ]]; then
-		printf "%8i B/s |      N/A    "  $bytes
+		printf "%8i B/s  |      N/A    "  $bytes
 	elif [[ $bytes -lt 1000000 ]]; then
 		local KiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 } END { if (NR == 0) { print "error" } }' )
 		printf "%7s KB/s  | %7s Mbps" "$KiBs" "$Mbps"
