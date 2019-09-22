@@ -324,7 +324,7 @@ europespeedtest () {
 	echo "" | tee -a $log
 	speed "United Kingdom, London (Vultr)  :" "http://lon-gb-ping.vultr.com/vultr.com.100MB.bin"
 	speed "Netherlands, Amsterdam (Vultr)  :" "http://ams-nl-ping.vultr.com/vultr.com.100MB.bin"
-	speed "Germany, Frankfurt (LeaseWeb)   :" "http://mirror.de.leaseweb.net/speedtest/100mb.bin"
+	speed "Germany, Frankfurt (Linode)     :" "http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin"
 	speed "Germany, Nuremberg (NetCup)     :" "http://lookingglass.netcup.net/100MB.test"
 	speed "France, Paris (Vultr)           :" "http://par-fr-ping.vultr.com/vultr.com.100MB.bin"
 	speed "Spain, Sevilla (Edis)           :" "https://es.edis.at/100MB.test"
