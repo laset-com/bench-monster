@@ -330,7 +330,7 @@ europespeedtest () {
 	speed "France, Paris (Vultr)           :" "http://par-fr-ping.vultr.com/vultr.com.100MB.bin"
 	speed "Spain, Madrid (M247)            :" "http://es.hosth.ink/100mb.bin"
 	speed "Spain, Sevilla (Edis)           :" "https://es.edis.at/100MB.test"
-	speed "Portugal, Porto (NOS)           :" "http://porto.speedtest.net.zon.pt/speedtest/random4000x4000.jpg"
+	speed "Portugal, Lisbon (Evolute)      :" "http://speedtest1.evolute.pt/speedtest/random4000x4000.jpg"
 	speed "Denmark, Copenhagen (Interxion) :" "http://dk.hosth.ink/100mb.bin"
 	speed "Sweden, Stockholm (HostHatch)   :" "http://lg.sto.hosthatch.com/100MB.test"
 	speed "Norway, Oslo (HostHatch)        :" "http://lg.osl.hosthatch.com/100MB.test"
