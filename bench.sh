@@ -296,7 +296,7 @@ northamericaspeedtest () {
 	echostyle "## North America Speedtest"
 	echo "" | tee -a $log
 	speed "USA, New York (DigitalOcean) :" "http://speedtest-nyc3.digitalocean.com/100mb.test"
-	speed "USA, Washington (Softlayer)  :" "http://speedtest.wdc04.softlayer.com/downloads/test100.zip"
+	speed "USA, Washington D.C. (Psychz):" "http://ash.lg.budgetnode.net/100MB.test"
 	speed "USA, Chicago (Vultr)         :" "http://il-us-ping.vultr.com/vultr.com.100MB.bin"
 	speed "USA, Kansas City (Joe's DC)  :" "https://lg.joesdatacenter.com/100MB.test"
 	speed "USA, Denver (Mean Servers)   :" "http://den.meanservers.com/lg/100MB.tar.gz"
