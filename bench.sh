@@ -336,7 +336,7 @@ europespeedtest () {
 	speed "Norway, Oslo (HostHatch)        :" "http://lg.osl.hosthatch.com/100MB.test"
 	speed "Switzerland, Zurich (Interxion) :" "http://ch.hosth.ink/1000mb.bin"
 	speed "Italy, Milan (Prometeus)        :" "http://lg-milano.prometeus.net/100MB.test"
-	speed "Austria, Vienna (HostHatch)     :" "http://ping.online.net/100Mo.dat"
+	speed "Austria, Vienna (HostHatch)     :" "http://lg.vie.hosthatch.com/100MB.test"
 	speed "Poland, Warsaw (Edis)           :" "https://pl.edis.at/100MB.test"
 	speed "Russia, Moscow (FoxCloud)       :" "http://94.103.12.105/100.mb"
 	speed "Russia, St.Petersburg (Hexcore) :" "http://92.255.99.30/100.mb"
