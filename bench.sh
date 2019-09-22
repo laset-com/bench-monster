@@ -491,7 +491,7 @@ iotest () {
 	# Disk test
 	echo " Disk Speed ($writemb_size):" | tee -a $log
 	if [[ $writemb != "1" ]]; then
-		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		io=$( ( dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Speed  -$io" | tee -a $log
 
 		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test oflag=dsync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
