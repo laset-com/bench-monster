@@ -358,7 +358,7 @@ ukrainespeedtest () {
 	speed "Ukraine, Ternopil (Columbus)  :" "http://speedtest.columbus.te.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Rivne (UARnet)       :" "http://strivne.uar.net/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Chernivtsi (C.T.Net) :" "http://speedtest.ctn.cv.ua/speedtest/random4000x4000.jpg"
-	speed "Ukraine, Khmelnitskiy (Happy) :" "http://speedtest2.gtu.net.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Khmelnytskyi (Happy) :" "http://speedtest2.gtu.net.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Kharkiv (Triolan)    :" "http://kharkiv.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Dnipro (Triolan)     :" "http://dnepr.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Odesa (Black Sea)    :" "http://speedtest.blacksea.net.ua/speedtest/random4000x4000.jpg"
