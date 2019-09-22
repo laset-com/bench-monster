@@ -506,6 +506,10 @@ iotest () {
 	if [[ $writemb != "1" ]]; then
 		io=$( ( dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   1st run: $io" | tee -a $log
+		io=$( ( dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		echo "   2nd run: $io" | tee -a $log
+		io=$( ( dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		echo "   3rd run: $io" | tee -a $log
 	else
 		echo "   Not enough space to test." | tee -a $log
 	fi
