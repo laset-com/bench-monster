@@ -491,11 +491,21 @@ iotest () {
 	# Disk test
 	echo " Disk Speed ($writemb_size):" | tee -a $log
 	if [[ $writemb != "1" ]]; then
-		io=$( ( dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Speed  -$io" | tee -a $log
 
 		io=$( ( dd bs=512K count=$writemb if=/dev/zero of=test oflag=dsync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 		echo "   I/O Direct -$io" | tee -a $log
+	else
+		echo "   Not enough space to test." | tee -a $log
+	fi
+	echo "" | tee -a $log
+	
+	# Disk test
+	echo " dd: sequential write speed:" | tee -a $log
+	if [[ $writemb != "1" ]]; then
+		io=$( ( dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync; rm -f test ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+		echo "   1st run: $io" | tee -a $log
 	else
 		echo "   Not enough space to test." | tee -a $log
 	fi
