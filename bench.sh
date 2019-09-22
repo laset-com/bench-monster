@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.4 beta  (22 Sep 2019)             / "
+	echo "  \               V 1.2.5 beta  (22 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.4 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.5 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -353,6 +353,7 @@ ukrainespeedtest () {
 	echo "" | tee -a $log
 	speed "Ukraine, Kyiv (Ukrtelecom)    :" "http://95.47.137.63/100.mb"
 	speed "Ukraine, Kyiv (KyivStar)      :" "http://www.speedtest.kyivstar.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Kyiv (Volia)         :" "http://speedtest.volia.net/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Lviv (Komitex)       :" "http://speedtest.komitex.net/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Lviv (UARnet)        :" "http://speedtest.uar.net/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Ivano-Frankivsk (SIM):" "http://speedtest.sim.if.ua/speedtest/random4000x4000.jpg"
@@ -360,9 +361,12 @@ ukrainespeedtest () {
 	speed "Ukraine, Rivne (UARnet)       :" "http://strivne.uar.net/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Chernivtsi (C.T.Net) :" "http://speedtest.ctn.cv.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Khmelnytskyi (Happy) :" "http://speedtest2.gtu.net.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Poltava (Triolan)    :" "http://poltava.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Kharkiv (Triolan)    :" "http://kharkiv.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Dnipro (Triolan)     :" "http://dnepr.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Odesa (Black Sea)    :" "http://speedtest.blacksea.net.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Mariupol (CityLine)  :" "http://speedtest.blacksea.net.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Simferopil (CRELCOM) :" "http://speedtest.crimea.net/speedtest/random4000x4000.jpg"
 	echo "" | tee -a $log
 }
 
