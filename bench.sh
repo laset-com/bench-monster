@@ -368,7 +368,7 @@ ukrainespeedtest () {
 	speed "Ukraine, Dnipro (Triolan)        :" "http://dnepr.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Odesa (Black Sea)       :" "http://speedtest.blacksea.net.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Kherson (SkyNET)        :" "http://sp.skynet.ua/speedtest/random4000x4000.jpg"
-	speed "Ukraine, Mariupol (CityLine)     :" "http://speedtest.cl.dn.uaspeedtest/random4000x4000.jpg"
+	speed "Ukraine, Mariupol (CityLine)     :" "http://speedtest.cl.dn.ua/speedtest/random4000x4000.jpg"
 	echo "" | tee -a $log
 }
 
