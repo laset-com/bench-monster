@@ -217,26 +217,26 @@ speed_test(){
 
 print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
-    speed_test '' 'Speedtest.net'
-    speed_fast_com
-    speed_test '17251' 'Guangzhou CT'
-    speed_test '23844' 'Wuhan     CT'
-    speed_test '7509' 'Hangzhou  CT'
-	speed_test '3973' 'Lanzhou   CT'
-	speed_test '24447' 'Shanghai  CU'
-	speed_test '5724' "Heifei    CU"
-	speed_test '5726' 'Chongqing CU'
-	speed_test '17228' 'Xinjiang  CM'
-	speed_test '18444' 'Xizang    CM'
+	speed_test '' 'Speedtest.net'
+	speed_fast_com
+	speed_test '17398' 'Ukraine, Lviv (Kopiyka) '
+	speed_test '27137' 'Ukraine, Lviv (Domino)  '
+	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
+	speed_test '6225' 'Ukraine, Lviv (ZNet)    '
+	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) '
+	speed_test '1204' 'Ukraine, Lviv (Network) '
+	speed_test '26293' 'Ukraine, Lviv (LinkCom) '
+	speed_test '16367' 'Ukraine, Lviv (PointNet)'
+	speed_test '12786' 'Ukraine, Lviv (ASTRA)   '
 	 
 	rm -rf speedtest.py
 }
 
 print_speedtest_fast() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
-    speed_test '' 'Speedtest.net'
-    speed_fast_com
-    speed_test '7509' 'Hangzhou  CT'
+	speed_test '' 'Speedtest.net'
+	speed_fast_com
+	speed_test '7509' 'Hangzhou  CT'
 	speed_test '24447' 'Shanghai  CU'
 	speed_test '18444' 'Xizang    CM'
 	 
