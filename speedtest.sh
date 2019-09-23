@@ -630,7 +630,7 @@ bench_all(){
 	print_end_time;
 	next;
 	cleanup;
-	sharetest гubuntu;
+	sharetest ubuntu;
 }
 
 fast_bench(){
