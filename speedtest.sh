@@ -1,14 +1,4 @@
 #!/usr/bin/env bash
-#
-# Description: Auto system info & I/O test & network to China script
-#
-# Copyright (C) 2017 - 2018 Oldking <oooldking@gmail.com>
-#
-# Thanks: Bench.sh <i@teddysun.com>
-#
-# URL: https://www.oldking.net/350.html
-#
-
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
