@@ -681,7 +681,7 @@ case $1 in
 		bench_all;
 		is_share="share"
 		if [[ $2 == "" ]]; then
-			sharetest ubuntu;
+			sharetest clbin;
 		else
 			sharetest $2;
 		fi
