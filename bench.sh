@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.7 beta  (23 Sep 2019)             / "
+	echo "  \               V 1.2.8 beta  (23 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.7 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.8 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -184,12 +184,11 @@ systeminfo () {
 	corescache=$( awk -F: '/cache size/ {cache=$2} END {print cache}' /proc/cpuinfo )
 	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
 	if [[ $cores == "1" ]]; then
-		echo " CPU Cores   : $cores core @ $freq MHz" | tee -a $log
+		echo " CPU Cores   : $cores core @ $freq MHz $corescache cache" | tee -a $log
 	else
-		echo " CPU Cores   : $cores cores @ $freq MHz" | tee -a $log
+		echo " CPU Cores   : $cores cores @ $freq MHz $corescache cache" | tee -a $log
 	fi
 	sleep 0.1
-	echo " CPU Cache   :$corescache" | tee -a $log
 	load=$( w | head -1 | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
 	echo " Load average: $load" | tee -a $log
 	sleep 0.1
