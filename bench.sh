@@ -191,7 +191,7 @@ systeminfo () {
 	sleep 0.1
 	echo " CPU Cache   :$corescache" | tee -a $log
 	load=$( w | head -1 | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
-	echo " Load average :$load" | tee -a $log
+	echo " Load average: $load" | tee -a $log
 	sleep 0.1
 
 	# RAM Information
