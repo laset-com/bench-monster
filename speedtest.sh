@@ -12,8 +12,8 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0.4 (23 Sep 2019)                / "
-	echo " \                       Bench.Monster                   / "
+	echo " \                  v1.0.4 (23 Sep 2019)                 / "
+	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
 }
@@ -574,9 +574,9 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
+	printf ' Speedbench.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
 	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.5 | tee -a $log
-	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
+	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
 sharetest() {
