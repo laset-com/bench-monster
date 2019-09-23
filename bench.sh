@@ -373,7 +373,7 @@ ukrainespeedtest () {
 	speed "Ukraine, Chernihiv (UltraNet)    :" "http://speedtest.ultranet.com.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Sumy (TKS)              :" "http://speedtest.tks.sumy.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Kharkiv (Triolan)       :" "http://kharkiv.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
-	speed "Ukraine, Dnipro (Triolan)        :" "http://dnepr.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Dnipro (D-lan)          :" "http://speedtest.d-lan.dp.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Odesa (Black Sea)       :" "http://speedtest.blacksea.net.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Kherson (SkyNET)        :" "http://sp.skynet.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Mariupol (CityLine)     :" "http://speedtest.cl.dn.ua/speedtest/random4000x4000.jpg"
