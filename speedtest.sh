@@ -594,7 +594,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 1 -c 1 $1 | grep 'rtt' | cut -d"/" -f5 )
+	local ping_ms=$( ping -w 1 -c 3 $1 | grep 'rtt' | cut -d"/" -f5 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
