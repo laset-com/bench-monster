@@ -10,7 +10,7 @@ about() {
 	echo ""
 	echo " ========================================================= "
 	echo " \                 speedtest.sh  Benchmark               / "
-	echo " \                   v1.0.2 (23 Sep 2019)                / "
+	echo " \                   v1.0.3 (23 Sep 2019)                / "
 	echo " \                  https://bench.monster/               / "
 	echo " ========================================================= "
 	echo ""
@@ -630,7 +630,7 @@ bench_all(){
 	print_end_time;
 	next;
 	cleanup;
-	sharetest clbin;
+	sharetest гubuntu;
 }
 
 fast_bench(){
