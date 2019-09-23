@@ -225,7 +225,7 @@ systeminfo () {
 	elif [[ $secs -lt 86400 ]]; then
 		sysuptime=$( printf '%dhrs %dmin %dsec\n' $((secs/3600)) $((secs%3600/60)) $((secs%60)) )
 	else
-		sysuptime=$( echo $((secs/86400))"days - "$(date -d "1970-01-01 + $secs seconds" "+%Hhrs %Mmin %Ssec") )
+		sysuptime=$( echo $((secs/86400))" days - "$(date -d "1970-01-01 + $secs seconds" "+%Hhrs %Mmin %Ssec") )
 	fi
 	echo " Running for : $sysuptime" | tee -a $log
 	echo "" | tee -a $log
