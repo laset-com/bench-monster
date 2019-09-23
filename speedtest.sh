@@ -563,9 +563,8 @@ sharetest() {
 	log_preupload
 	case $1 in
 	'ubuntu')
-		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
-			grep "Location" | awk 'print "https://paste.ubuntu.com"$3' );;
-	'haste' )
+		share_link=$( curl -v --data-urlencode "content@$log" -d "poster=speedtest.log" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
+			grep "Location" | awk '{print "https://paste.ubuntu.com"$3}' );;
 		share_link=$( curl -X POST -s -d "$(cat $log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
 	'clbin' )
 		share_link=$( curl -sF 'clbin=<-' https://clbin.com < $log );;
