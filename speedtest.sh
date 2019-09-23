@@ -159,6 +159,19 @@ next() {
     printf "%-70s\n" "-" | sed 's/\s/-/g' | tee -a $log
 }
 
+pingtest() {
+	# ping one time
+	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
+	local ping_ms=$( ping -c 4 -q $host | awk '/rtt min/ {split($4,a,"/"); print a[1], a[2], a[3], a[4]}' )
+
+	# get download speed and print
+	if [[ $ping_ms == "" ]]; then
+		printf " | ping error!"
+	else
+		printf " | ping %3i.%sms" "${ping_ms%.*}" "${ping_ms#*.}"
+	fi
+}
+
 speed_test(){
 	if [[ $1 == '' ]]; then
 		temp=$(python speedtest.py --share 2>&1)
@@ -198,19 +211,6 @@ speed_test(){
 		else
 	        local cerror="ERROR"
 		fi
-	fi
-}
-
-pingtest() {
-	# ping one time
-	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
-	local ping_ms=$( ping -c 4 -q $host | awk '/rtt min/ {split($4,a,"/"); print a[1], a[2], a[3], a[4]}' )
-
-	# get download speed and print
-	if [[ $ping_ms == "" ]]; then
-		printf " | ping error!"
-	else
-		printf " | ping %3i.%sms" "${ping_ms%.*}" "${ping_ms#*.}"
 	fi
 }
 
