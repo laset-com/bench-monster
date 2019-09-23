@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -9,9 +10,10 @@ PLAIN='\033[0m'
 about() {
 	echo ""
 	echo " ========================================================= "
-	echo " \                 speedtest.sh  Benchmark               / "
-	echo " \                   v1.0.3 (23 Sep 2019)                / "
-	echo " \                  https://bench.monster/               / "
+	echo " \           https://bench.monster/speedtest.sh         / "
+	echo " \       Basic system info, I/O test and speedtest       / "
+	echo " \                   v1.0.4 (23 Sep 2019)                / "
+	echo " \                       Bench.Monster                   / "
 	echo " ========================================================= "
 	echo ""
 }
@@ -159,19 +161,6 @@ next() {
     printf "%-70s\n" "-" | sed 's/\s/-/g' | tee -a $log
 }
 
-pingtest() {
-	# ping one time
-	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
-	local ping_ms=$( ping -c 4 -q $host | awk '/rtt min/ {split($4,a,"/"); print a[1], a[2], a[3], a[4]}' )
-
-	# get download speed and print
-	if [[ $ping_ms == "" ]]; then
-		printf " | ping error!"
-	else
-		printf " | ping %3i.%sms" "${ping_ms%.*}" "${ping_ms#*.}"
-	fi
-}
-
 speed_test(){
 	if [[ $1 == '' ]]; then
 		temp=$(python speedtest.py --share 2>&1)
@@ -201,13 +190,12 @@ speed_test(){
 		if [[ ${is_down} ]]; then
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
-		local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
-		local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
 	        local relatency=$(pingtest $3)
-	        #temp=$(echo "$relatency" | awk -F '.' '{print $1}')
-        	#if [[ ${temp} -gt 1000 ]]; then
-            	#relatency=" - "
-        	#fi
+	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	if [[ ${temp} -gt 1000 ]]; then
+            	relatency=" - "
+        	fi
 	        local nodeName=$2
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
@@ -221,8 +209,8 @@ speed_test(){
 }
 
 print_speedtest() {
-	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Ping" | tee -a $log
-	speed_test '' 'Speedtest.net           '
+	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
+        speed_test '' 'Speedtest.net           '
 	speed_test '17398' 'Ukraine, Lviv (Kopiyka) '
 	speed_test '27137' 'Ukraine, Lviv (Domino)  '
 	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
@@ -237,14 +225,34 @@ print_speedtest() {
 }
 
 print_speedtest_fast() {
-	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
-	speed_test '' 'Speedtest.net           '
+	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
+        speed_test '' 'Speedtest.net           '
 	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
 	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) '
 	speed_test '1204' 'Ukraine, Lviv (Network) '
 	speed_test '12786' 'Ukraine, Lviv (ASTRA)   '
 	 
 	rm -rf speedtest.py
+}
+
+speed_fast_com() {
+	temp=$(python fast_com_example_usage.py 2>&1)
+	is_down=$(echo "$temp" | grep 'Result') 
+		if [[ ${is_down} ]]; then
+	        temp1=$(echo "$temp" | awk -F ':' '/Result/{print $2}')
+	        temp2=$(echo "$temp1" | awk -F ' ' '/Mbps/{print $1}')
+	        local REDownload="$temp2 Mbit/s"
+	        local reupload="0.00 Mbit/s"
+	        local relatency="-"
+	        local nodeName="Fast.com"
+
+	        printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+		else
+	        local cerror="ERROR"
+		fi
+	rm -rf fast_com_example_usage.py
+	rm -rf fast_com.py
+
 }
 
 io_test() {
@@ -566,9 +574,9 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' speedtest.sh -> https://bench.monster/\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.2 | tee -a $log
-	printf ' Usage : wget -qO- bench.monster/speedtest.sh | bash\n' | tee -a $log
+	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.5 | tee -a $log
+	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
 sharetest() {
@@ -577,8 +585,8 @@ sharetest() {
 	log_preupload
 	case $1 in
 	'ubuntu')
-		share_link=$( curl -v --data-urlencode "content@$log" -d "poster=speedtest.log" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
-			grep "Location" | awk '{print "https://paste.ubuntu.com"$3}' );;
+		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
+			grep "Location" | awk '{print $3}' );;
 	'haste' )
 		share_link=$( curl -X POST -s -d "$(cat $log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
 	'clbin' )
@@ -594,9 +602,9 @@ sharetest() {
 }
 
 log_preupload() {
-	log_up="$HOME/speedtest_upload.log"
+	log_up="$HOME/superbench_upload.log"
 	true > $log_up
-	$(cat speedtest.log 2>&1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > $log_up)
+	$(cat superbench.log 2>&1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > $log_up)
 }
 
 get_ip_whois_org_name(){
@@ -608,7 +616,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 1 -c 2 $1 | grep 'rtt' | cut -d"/" -f5 )
+	local ping_ms=$( ping -w 1 -c 1 $1 | grep 'rtt' | cut -d"/" -f5 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
@@ -621,6 +629,7 @@ pingtest() {
 cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
+	rm -f fast_com*;
 	rm -f tools.py;
 	rm -f ip_json.json
 }
@@ -644,7 +653,7 @@ bench_all(){
 	print_end_time;
 	next;
 	cleanup;
-	sharetest ubuntu;
+	sharetest clbin;
 }
 
 fast_bench(){
@@ -695,7 +704,7 @@ case $1 in
 		bench_all;
 		is_share="share"
 		if [[ $2 == "" ]]; then
-			sharetest clbin;
+			sharetest ubuntu;
 		else
 			sharetest $2;
 		fi
@@ -712,7 +721,7 @@ if [[  ! $is_share == "share" ]]; then
 	case $2 in
 		'share'|'-s'|'--s'|'-share'|'--share' )
 			if [[ $3 == '' ]]; then
-				sharetest clbin;
+				sharetest ubuntu;
 			else
 				sharetest $3;
 			fi
