@@ -201,7 +201,12 @@ speed_test(){
 		if [[ ${is_down} ]]; then
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
+		local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
 	        local relatency=$(pingtest $3)
+	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	if [[ ${temp} -gt 1000 ]]; then
+            	relatency=" - "
+        	fi
 	        local nodeName=$2
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
@@ -599,6 +604,17 @@ get_ip_whois_org_name(){
 	#org_name=$(echo $result | jq '.objects.object.[1].attributes.attribute.[1].value' | sed 's/\"//g')
 	org_name=$(echo $result | jq '.objects.object[1].attributes.attribute[1]' | sed 's/\"//g')
     echo $org_name;
+}
+
+pingtest() {
+	local ping_ms=$( ping -w 1 -c 2 $1 | grep 'rtt' | cut -d"/" -f5 )
+
+	# get download speed and print
+	if [[ $ping_ms == "" ]]; then
+		printf "ping error!"  | tee -a $log
+	else
+		printf "%3i.%s ms" "${ping_ms%.*}" "${ping_ms#*.}"  | tee -a $log
+	fi
 }
 
 cleanup() {
