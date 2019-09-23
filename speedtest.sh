@@ -10,7 +10,7 @@ about() {
 	echo ""
 	echo " ========================================================= "
 	echo " \                 speedtest.sh  Benchmark               / "
-	echo " \                   v1.0.1 (23 Sep 2019)                / "
+	echo " \                   v1.0.2 (23 Sep 2019)                / "
 	echo " \                  https://bench.monster/               / "
 	echo " ========================================================= "
 	echo ""
@@ -143,15 +143,6 @@ benchinit() {
 	fi
 	chmod a+rx tools.py
 
-	# install fast.com-cli
-	if  [ ! -e 'fast_com.py' ]; then
-		echo " Installing Fast.com-cli ..."
-		wget --no-check-certificate https://raw.githubusercontent.com/sanderjo/fast.com/master/fast_com.py > /dev/null 2>&1
-		wget --no-check-certificate https://raw.githubusercontent.com/sanderjo/fast.com/master/fast_com_example_usage.py > /dev/null 2>&1
-	fi
-	chmod a+rx fast_com.py
-	chmod a+rx fast_com_example_usage.py
-
 	sleep 5
 
 	# start
@@ -216,8 +207,8 @@ speed_test(){
 }
 
 print_speedtest() {
-	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
-	speed_test '' 'Speedtest.net          '
+	printf "%-30s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
+	speed_test '' 'Speedtest.net           '
 	speed_test '17398' 'Ukraine, Lviv (Kopiyka) '
 	speed_test '27137' 'Ukraine, Lviv (Domino)  '
 	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
@@ -562,7 +553,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' speedtest.sh -> https://bench.monster/\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.1 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.2 | tee -a $log
 	printf ' Usage : wget -qO- bench.monster/speedtest.sh | bash\n' | tee -a $log
 }
 
@@ -616,7 +607,6 @@ pingtest() {
 cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
-	rm -f fast_com*;
 	rm -f tools.py;
 	rm -f ip_json.json
 }
@@ -708,7 +698,7 @@ if [[  ! $is_share == "share" ]]; then
 	case $2 in
 		'share'|'-s'|'--s'|'-share'|'--share' )
 			if [[ $3 == '' ]]; then
-				sharetest ubuntu;
+				sharetest clbin;
 			else
 				sharetest $3;
 			fi
