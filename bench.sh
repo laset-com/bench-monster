@@ -196,7 +196,7 @@ systeminfo () {
 	# RAM Information
 	tram="$( free -m | grep Mem | awk 'NR=1 {print $2}' ) MiB"
 	fram="$( free -m | grep Mem | awk 'NR=1 {print $7}' ) MiB"
-	fswap=$( free -m | grep Swap | awk 'NR=1 {print $4}' )MiB
+	fswap="$( free -m | grep Swap | awk 'NR=1 {print $4}') MiB"
 	echo " Total RAM   : $tram (Free $fram)" | tee -a $log
 	sleep 0.1
 
