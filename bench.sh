@@ -595,6 +595,7 @@ finishedon() {
 	echo " Benchmark finished in $((end_seconds-start_seconds)) seconds" | tee -a $log
 	echo "   results saved on $log"
 	echo "" | tee -a $log
+	rm -f bench.sh
 }
 
 sharetest() {
