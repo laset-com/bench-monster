@@ -151,7 +151,6 @@ systeminfo () {
 	fi
 
 	virtualx=$(dmesg) 2>/dev/null
-	fi
 	
 	if grep docker /proc/1/cgroup -qa; then
 	    virtual="Docker"
@@ -624,34 +623,34 @@ case $CMD in
 	'-northamerica'|'-na'|'--northamerica'|'--na' )
 		benchinit; systeminfo; iotest; cdnspeedtest; northamericaspeedtest; finishedon;;
 	'-naspeed'|'--naspeed' )
-		benchinit; cdnspeedtest; northamericaspeedtest;;
+		benchinit; cdnspeedtest; northamericaspeedtest; finishedon;;
 	'-europe'|'-eu'|'--europe'|'--eu' )
 		benchinit; systeminfo; iotest; cdnspeedtest; europespeedtest; finishedon;;
 	'-euspeed'|'--euspeed' )
-		benchinit; cdnspeedtest; europespeedtest;;
+		benchinit; cdnspeedtest; europespeedtest; finishedon;;
 	'-ukraine'|'-ua'|'--ukraine'|'--ua' )
 		benchinit; systeminfo; iotest; cdnspeedtest; ukrainespeedtest; finishedon;;
 	'-uaspeed'|'--uaspeed' )
-		benchinit; cdnspeedtest; ukrainespeedtest;;
+		benchinit; cdnspeedtest; ukrainespeedtest; finishedon;;
 	'-asia'|'--asia' )
 		benchinit; systeminfo; iotest; cdnspeedtest; asiaspeedtest; finishedon;;
 	'-asiaspeed'|'--asiaspeed' )
-		benchinit; cdnspeedtest; asiaspeedtest;;
+		benchinit; cdnspeedtest; asiaspeedtest; finishedon;;
 	'-southamerica'|'-sa'|'--southamerica'|'--sa' )
 		benchinit; systeminfo; iotest; cdnspeedtest; southamericaspeedtest; finishedon;;
 	'-saspeed'|'--saspeed' )
-		benchinit; cdnspeedtest; southamericaspeedtest;;
+		benchinit; cdnspeedtest; southamericaspeedtest; finishedon;;
 	'-more'|'--more' )
-		benchinit; morespeedtest;;
+		benchinit; morespeedtest; finishedon;;
 	'-cdn'|'--cdn' )
-		benchinit; cdnspeedtest;;
+		benchinit; cdnspeedtest; finishedon;;
 	'-b'|'--b' )
 		benchinit; systeminfo; cdnspeedtest; iotest; finishedon;;
 	'-a'|'-all'|'-bench'|'--a'|'--all'|'--bench' )
 		benchinit; systeminfo; iotest; cdnspeedtest; northamericaspeedtest;
 		europespeedtest; asiaspeedtest; southamericaspeedtest; morespeedtest; finishedon;;
 	'-speed'|'-speedtest'|'-speedcheck'|'--speed'|'--speedtest'|'--speedcheck' )
-		benchinit; speedtestresults;;
+		benchinit; speedtestresults; finishedon;;
 	'-help'|'--help'|'help' )
 		prms;;
 	'-about'|'--about'|'about' )
