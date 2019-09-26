@@ -146,22 +146,19 @@ systeminfo () {
 	sleep 0.1
 
 	#Detect virtualization
-	if  [ $(which dmidecode) ]; then
-		sys_manu=$(dmidecode -s system-manufacturer) 2>/dev/null
-		sys_product=$(dmidecode -s system-product-name) 2>/dev/null
-		sys_ver=$(dmidecode -s system-version) 2>/dev/null
-	else
-		sys_manu=""
-		sys_product=""
-		sys_ver=""
+	if hash ifconfig 2>/dev/null; then
+		eth=$(ifconfig)
+	fi
+
+	virtualx=$(dmesg) 2>/dev/null
 	fi
 	
 	if grep docker /proc/1/cgroup -qa; then
 	    virtual="Docker"
 	elif grep lxc /proc/1/cgroup -qa; then
-		virtual="Lxc"
+		virtual="LXC"
 	elif grep -qa container=lxc /proc/1/environ; then
-		virtual="Lxc"
+		virtual="LXC"
 	elif [[ -f /proc/user_beancounters ]]; then
 		virtual="OpenVZ"
 	elif [[ "$virtualx" == *kvm-clock* ]]; then
