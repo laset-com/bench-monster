@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.8 beta  (23 Sep 2019)             / "
+	echo "  \               V 1.2.9 beta  (26 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.8 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.2.9 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -70,7 +70,7 @@ echo "" | tee -a $log
 CMD="$1"
 PRM1="$2"
 PRM2="$3"
-log="$HOME/bench.log"
+log="$HOME/benchmonster.log"
 ARG="$BASH_SOURCE $@"
 benchram="/mnt/tmpbenchram"
 NULL="/dev/null"
@@ -146,13 +146,27 @@ systeminfo () {
 	sleep 0.1
 
 	#Detect virtualization
-	if hash ifconfig 2>$NULL; then
-		eth=$(ifconfig)
+	if  [ $(which dmidecode) ]; then
+		sys_manu=$(dmidecode -s system-manufacturer) 2>/dev/null
+		sys_product=$(dmidecode -s system-product-name) 2>/dev/null
+		sys_ver=$(dmidecode -s system-version) 2>/dev/null
+	else
+		sys_manu=""
+		sys_product=""
+		sys_ver=""
 	fi
-	virtualx=$(dmesg)
-	if [[ -f /proc/user_beancounters ]]; then
+	
+	if grep docker /proc/1/cgroup -qa; then
+	    virtual="Docker"
+	elif grep lxc /proc/1/cgroup -qa; then
+		virtual="Lxc"
+	elif grep -qa container=lxc /proc/1/environ; then
+		virtual="Lxc"
+	elif [[ -f /proc/user_beancounters ]]; then
 		virtual="OpenVZ"
 	elif [[ "$virtualx" == *kvm-clock* ]]; then
+		virtual="KVM"
+	elif [[ "$cname" == *KVM* ]]; then
 		virtual="KVM"
 	elif [[ "$virtualx" == *"VMware Virtual Platform"* ]]; then
 		virtual="VMware"
@@ -160,10 +174,18 @@ systeminfo () {
 		virtual="Parallels"
 	elif [[ "$virtualx" == *VirtualBox* ]]; then
 		virtual="VirtualBox"
-	elif [[ "$eth" == *eth0* ]];then
-		virtual="Dedicated"
 	elif [[ -e /proc/xen ]]; then
 		virtual="Xen"
+	elif [[ "$sys_manu" == *"Microsoft Corporation"* ]]; then
+		if [[ "$sys_product" == *"Virtual Machine"* ]]; then
+			if [[ "$sys_ver" == *"7.0"* || "$sys_ver" == *"Hyper-V" ]]; then
+				virtual="Hyper-V"
+			else
+				virtual="Microsoft Virtual Machine"
+			fi
+		fi
+	else
+		virtual="Dedicated"
 	fi
 
 	#Kernel
