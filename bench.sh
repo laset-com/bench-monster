@@ -385,7 +385,7 @@ ukrainespeedtest () {
 	speed "Ukraine, Ternopil (Columbus)     :" "http://speedtest.columbus.te.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Rivne (UARnet)          :" "http://strivne.uar.net/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Chernivtsi (C.T.Net)    :" "http://speedtest.ctn.cv.ua/speedtest/random4000x4000.jpg"
-	speed "Ukraine, Khmelnytskyi (Happy)    :" "http://speedtest2.gtu.net.ua/speedtest/random4000x4000.jpg"
+	speed "Ukraine, Khmelnytskyi (GMHost)   :" "http://lg.gmhost.hosting/100MB.test"
 	speed "Ukraine, Kropyvnytskyi (Imperial):" "http://speedtest.imperial.net.ua/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Cherkasy (McLaut)       :" "http://speedtest.mclaut.com/speedtest/random4000x4000.jpg"
 	speed "Ukraine, Poltava (Triolan)       :" "http://poltava.speedtest.triolan.com.ua/speedtest/random4000x4000.jpg"
