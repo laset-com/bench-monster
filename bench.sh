@@ -264,14 +264,14 @@ FormatBytes() {
 	bytes=${1%.*}
 	local Mbps=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 * 8 } END { if (NR == 0) { print "error" } }' )
 	if [[ $bytes -lt 1000 ]]; then
-		printf "%8i B/s  |      N/A    "  $bytes
+		printf "%8i B/s |      N/A    "  $bytes
 	elif [[ $bytes -lt 1000000 ]]; then
 		local KiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 } END { if (NR == 0) { print "error" } }' )
-		printf "%7s KB/s  | %7s Mbps" "$KiBs" "$Mbps"
+		printf "%7s KB/s | %7s Mbps" "$KiBs" "$Mbps"
 	else
 		# awk way for accuracy
 		local MiBs=$( printf "%s" "$bytes" | awk '{ printf "%.2f", $0 / 1024 / 1024 } END { if (NR == 0) { print "error" } }' )
-		printf "%7s MiB/s | %7s Mbps" "$MiBs" "$Mbps"
+		printf "%7s MB/s | %7s Mbps" "$MiBs" "$Mbps"
 
 		# bash way
 		# printf "%4s MiB/s | %4s Mbps""$(( bytes / 1024 / 1024 ))" "$(( bytes / 1024 / 1024 * 8 ))"
@@ -281,7 +281,7 @@ FormatBytes() {
 pingtest() {
 	# ping one time
 	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
-	local ping_ms=$( ping -w1 -c1 $ping_link | grep 'rtt' | cut -d"/" -f5 )
+	local ping_ms=$( ping -w1 -c3 -q $ping_link | cut -d "/" -s -f5 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
