@@ -3,17 +3,17 @@
 about() {
 	echo ""
 	echo " ========================================================= "
-	echo " \           https://bench.monster/speedtest.sh         / "
-	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.3 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
+	echo " \         https://bench.monster/speedtest.html          / "
+	echo " \       Basic system info, I/O test and speedtest       / "
+	echo " \                  v1.1.4 (27 Sep 2019)                 / "
 	echo " ========================================================= "
 	echo ""
 }
 
 print_intro() {
-	printf ' Speedtest.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
-	printf " Mode  : \e%s\e    Version : \e%s\n" $mode_name 1.1.3 | tee -a $log
+	printf ' Speedtest.sh -- https://bench.monster/speedtest.html \n' | tee -a $log
+	printf ' Mode  : $mode_name    Version : 1.1.4 \n' | tee -a $log
 	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
@@ -217,7 +217,6 @@ print_speedtest() {
 	speed_test '6225' 'Ukraine, Lviv (ZNet)    ' 'http://178.212.102.70'
 	speed_test '1204' 'Ukraine, Lviv (Network) ' 'http://speedtest.network.lviv.ua'
 	speed_test '21900' 'Ukraine, Lviv (LimNet) ' 'http://speedtest.limnet.com.ua'
-	speed_test '16367' 'Ukraine, Lviv (PointNet)' 'http://speedtest.point.lviv.ua'
 	 
 	rm -rf speedtest.py
 }
@@ -481,16 +480,15 @@ print_io() {
 
 print_system_info() {
 	echo -e " CPU Model            : $cname" | tee -a $log
-	echo -e " CPU Cores            : $cores Cores @ $freq MHz $arch" | tee -a $log
-	echo -e " CPU Cache            : $corescache " | tee -a $log
-	echo -e " OS                   : $opsy ($lbit Bit) $virtual" | tee -a $log
-	echo -e " Kernel               : $kern" | tee -a $log
+	echo -e " CPU Cores            : $cores Cores @ $freq MHz $arch $corescache Cache" | tee -a $log
+	echo -e " OS                   : $opsy ($lbit Bit)" | tee -a $log
+	echo -e " Kernel               : $virtual / $kern" | tee -a $log
 	echo -e " Total Space          : $disk_used_size GB / $disk_total_size GB " | tee -a $log
 	echo -e " Total RAM            : $uram MB / $tram MB ($bram MB Buff)" | tee -a $log
 	echo -e " Total SWAP           : $uswap MB / $swap MB" | tee -a $log
 	echo -e " Uptime               : $up" | tee -a $log
 	echo -e " Load Average         : $load" | tee -a $log
-	echo -e " TCP CC               : $tcpctrl" | tee -a $log
+	#echo -e " TCP CC               : $tcpctrl" | tee -a $log
 }
 
 print_end_time() {
@@ -609,6 +607,7 @@ cleanup() {
 bench_all(){
 	mode_name="Standard"
 	print_intro;
+	next;
 	benchinit;
 	clear
 	next;
