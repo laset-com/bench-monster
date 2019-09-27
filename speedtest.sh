@@ -12,7 +12,7 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.0 (27 Sep 2019)                 / "
+	echo " \                  v1.1.1 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
@@ -616,7 +616,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 1 -c 1 $1 | grep 'rtt' | cut -d"/" -f5 )
+	local ping_ms=$( ping -w 4 -c 3 $1 | grep 'rtt' | cut -d"/" -f4 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
