@@ -12,7 +12,7 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.1 (27 Sep 2019)                 / "
+	echo " \                  v1.1.2 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
@@ -191,11 +191,11 @@ speed_test(){
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
-	        #local relatency=$(pingtest $3)
-	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
-        	if [[ ${temp} -gt 1000 ]]; then
-            	relatency=" - "
-        	fi
+	        local relatency=$(pingtest $3)
+	        #temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	#if [[ ${temp} -gt 1000 ]]; then
+            	#relatency=" - "
+        	#fi
 	        local nodeName=$2
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
@@ -211,15 +211,15 @@ speed_test(){
 print_speedtest() {
 	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
         speed_test '' 'Speedtest.net           '
-	speed_test '17398' 'Ukraine, Lviv (Kopiyka) '
-	speed_test '27137' 'Ukraine, Lviv (Domino)  '
-	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
-	speed_test '6225' 'Ukraine, Lviv (ZNet)    '
-	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) '
-	speed_test '1204' 'Ukraine, Lviv (Network) '
-	speed_test '26293' 'Ukraine, Lviv (LinkCom) '
-	speed_test '16367' 'Ukraine, Lviv (PointNet)'
-	speed_test '12786' 'Ukraine, Lviv (ASTRA)   '
+	speed_test '17398' 'Ukraine, Lviv (Kopiyka) ' 'http://speedtest.uar.net'
+	speed_test '27137' 'Ukraine, Lviv (Domino)  ' 'http://speedtest.uar.net'
+	speed_test '14887' 'Ukraine, Lviv (UARNet)  ' 'http://speedtest.uar.net'
+	speed_test '6225' 'Ukraine, Lviv (ZNet)    ' 'http://speedtest.uar.net'
+	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) ' 'http://speedtest.uar.net'
+	speed_test '1204' 'Ukraine, Lviv (Network) ' 'http://speedtest.uar.net'
+	speed_test '26293' 'Ukraine, Lviv (LinkCom) ' 'http://speedtest.uar.net'
+	speed_test '16367' 'Ukraine, Lviv (PointNet)' 'http://speedtest.uar.net'
+	speed_test '12786' 'Ukraine, Lviv (ASTRA)   ' 'http://speedtest.uar.net'
 	 
 	rm -rf speedtest.py
 }
@@ -616,7 +616,8 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 4 -c 3 $1 | grep 'rtt' | cut -d"/" -f4 )
+	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
+	local ping_ms=$( ping -w 1 -c 1 -q $ping_link | grep 'rtt' | cut -d"/" -f5 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
