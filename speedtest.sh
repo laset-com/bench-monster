@@ -662,7 +662,7 @@ case $1 in
 		bench_all;;
 	'about'|'-about'|'--about' )
 		about;;
-	'ukraine'|'-ua'|'--ua'|'-ukraine'|'--ukraine' )
+	'ukraine'|'-ukraine'|'--ukraine'|'-ua'|'--ua'|'-Ukraine'|'--Ukraine' )
 		ukraine_bench;;
 	'share'|'-s'|'--s'|'-share'|'--share' )
 		bench_all;
