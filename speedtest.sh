@@ -12,7 +12,7 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.9 (27 Sep 2019)                 / "
+	echo " \                  v1.1.0 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
@@ -191,11 +191,11 @@ speed_test(){
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
-	        local relatency=$(pingtest $3)
-	        #temp=$(echo "$relatency" | awk -F '.' '{print $1}')
-        	#if [[ ${temp} -gt 1000 ]]; then
-            	#relatency=" - "
-        	#fi
+	        #local relatency=$(pingtest $3)
+	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	if [[ ${temp} -gt 1000 ]]; then
+            	relatency=" - "
+        	fi
 	        local nodeName=$2
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
