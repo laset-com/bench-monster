@@ -540,9 +540,9 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' Speedtest Monster -> https://bench.monster/speedtest.html \n' | tee -a $log
-	printf " Region: %s    Version: %s\n" $mode_name 1.1.7 | tee -a $log
-	printf " curl -LsO bench.monster/speedtest.sh; sh speedtest.sh -%s\n" $mode_name | tee -a $log
+	printf ' Speedtest Monster v.1.1.7 \n' | tee -a $log
+	printf " Region: %s  https://bench.monster/speedtest.html\n" $region_name | tee -a $log
+	printf " curl -LsO bench.monster/speedtest.sh; sh speedtest.sh -%s\n" $region_name | tee -a $log
 }
 
 sharetest() {
@@ -622,7 +622,7 @@ bench_all(){
 }
 
 ukraine_bench(){
-	mode_name="Ukraine"
+	region_name="Ukraine"
 	print_intro;
 	next;
 	benchinit;
