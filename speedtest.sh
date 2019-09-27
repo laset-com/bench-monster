@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-SKYBLUE='\033[0;36m'
-PLAIN='\033[0m'
-
 about() {
 	echo ""
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.2 (27 Sep 2019)                 / "
+	echo " \                  v1.1.3 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
+}
+
+print_intro() {
+	printf ' Speedtest.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
+	printf " Mode  : \e%s\e    Version : \e%s\n" $mode_name 1.1.3 | tee -a $log
+	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
 cancel() {
@@ -49,12 +48,12 @@ benchinit() {
 	fi
 
 	# check root
-	[[ $EUID -ne 0 ]] && echo -e "${RED}Error:${PLAIN} This script must be run as root!" && exit 1
+	[[ $EUID -ne 0 ]] && echo -e "Error: This script must be run as root!" && exit 1
 
 	# check python
 	if  [ ! -e '/usr/bin/python' ]; then
 	        #echo -e
-	        #read -p "${RED}Error:${PLAIN} python is not install. You must be install python command at first.\nDo you want to install? [y/n]" is_install
+	        #read -p "Error: python is not install. You must be install python command at first.\nDo you want to install? [y/n]" is_install
 	        #if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
 	        echo " Installing Python ..."
 	            if [ "${release}" == "centos" ]; then
@@ -73,7 +72,7 @@ benchinit() {
 	# check curl
 	if  [ ! -e '/usr/bin/curl' ]; then
 	    #echo -e
-	    #read -p "${RED}Error:${PLAIN} curl is not install. You must be install curl command at first.\nDo you want to install? [y/n]" is_install
+	    #read -p "Error: curl is not install. You must be install curl command at first.\nDo you want to install? [y/n]" is_install
 	    #if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
 	        echo " Installing Curl ..."
 	            if [ "${release}" == "centos" ]; then
@@ -91,7 +90,7 @@ benchinit() {
 	# check wget
 	if  [ ! -e '/usr/bin/wget' ]; then
 	    #echo -e
-	    #read -p "${RED}Error:${PLAIN} wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
+	    #read -p "Error: wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
 	    #if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
 	        echo " Installing Wget ..."
 	            if [ "${release}" == "centos" ]; then
@@ -179,7 +178,7 @@ speed_test(){
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+	        	printf "%-17s%-18s%-20s%-12s\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
 	        fi
 		else
 	        local cerror="ERROR"
@@ -200,7 +199,7 @@ speed_test(){
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+	        	printf "%-17s%-18s%-20s%-12s\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
@@ -211,15 +210,14 @@ speed_test(){
 print_speedtest() {
 	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
         speed_test '' 'Speedtest.net           '
-	speed_test '17398' 'Ukraine, Lviv (Kopiyka) ' 'http://speedtest.uar.net'
-	speed_test '27137' 'Ukraine, Lviv (Domino)  ' 'http://speedtest.uar.net'
 	speed_test '14887' 'Ukraine, Lviv (UARNet)  ' 'http://speedtest.uar.net'
-	speed_test '6225' 'Ukraine, Lviv (ZNet)    ' 'http://speedtest.uar.net'
-	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) ' 'http://speedtest.uar.net'
-	speed_test '1204' 'Ukraine, Lviv (Network) ' 'http://speedtest.uar.net'
-	speed_test '26293' 'Ukraine, Lviv (LinkCom) ' 'http://speedtest.uar.net'
-	speed_test '16367' 'Ukraine, Lviv (PointNet)' 'http://speedtest.uar.net'
-	speed_test '12786' 'Ukraine, Lviv (ASTRA)   ' 'http://speedtest.uar.net'
+	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) ' 'http://speedtest.komitex.net'
+	speed_test '12786' 'Ukraine, Lviv (ASTRA)   ' 'http://speedtest.astra.in.ua'
+	speed_test '17398' 'Ukraine, Lviv (Kopiyka) ' 'http://speedtest.kopiyka.org'
+	speed_test '6225' 'Ukraine, Lviv (ZNet)    ' 'http://178.212.102.70'
+	speed_test '1204' 'Ukraine, Lviv (Network) ' 'http://speedtest.network.lviv.ua'
+	speed_test '21900' 'Ukraine, Lviv (LimNet) ' 'http://speedtest.limnet.com.ua'
+	speed_test '16367' 'Ukraine, Lviv (PointNet)' 'http://speedtest.point.lviv.ua'
 	 
 	rm -rf speedtest.py
 }
@@ -233,26 +231,6 @@ print_speedtest_fast() {
 	speed_test '12786' 'Ukraine, Lviv (ASTRA)   '
 	 
 	rm -rf speedtest.py
-}
-
-speed_fast_com() {
-	temp=$(python fast_com_example_usage.py 2>&1)
-	is_down=$(echo "$temp" | grep 'Result') 
-		if [[ ${is_down} ]]; then
-	        temp1=$(echo "$temp" | awk -F ':' '/Result/{print $2}')
-	        temp2=$(echo "$temp1" | awk -F ' ' '/Mbps/{print $1}')
-	        local REDownload="$temp2 Mbit/s"
-	        local reupload="0.00 Mbit/s"
-	        local relatency="-"
-	        local nodeName="Fast.com"
-
-	        printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
-		else
-	        local cerror="ERROR"
-		fi
-	rm -rf fast_com_example_usage.py
-	rm -rf fast_com.py
-
 }
 
 io_test() {
@@ -308,10 +286,10 @@ ip_info(){
 		city=${region}
 	fi
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${YELLOW}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP            : $asn, $isp" | tee -a $log
+	echo -e " Organization         : $org" | tee -a $log
+	echo -e " Location             : $city, $country / $countryCode" | tee -a $log
+	echo -e " Region               : $region" | tee -a $log
 }
 
 ip_info2(){
@@ -323,10 +301,10 @@ ip_info2(){
 	countryCode=$(curl -s https://ipapi.co/country/)
 	region=$(curl -s https://ipapi.co/region/)
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${SKYBLUE}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP            : $asn" | tee -a $log
+	echo -e " Organization         : $org" | tee -a $log
+	echo -e " Location             : $city, $country / $countryCode" | tee -a $log
+	echo -e " Region               : $region" | tee -a $log
 }
 
 ip_info3(){
@@ -340,10 +318,10 @@ ip_info3(){
 	countryCode=$(python ip_info.py countryCode)
 	region=$(python ip_info.py regionName)
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP            : $asn, $isp" | tee -a $log
+	echo -e " Organization         : $org" | tee -a $log
+	echo -e " Location             : $city, $country / $countryCode" | tee -a $log
+	echo -e " Region               : $region" | tee -a $log
 
 	rm -rf ip_info.py
 }
@@ -372,10 +350,10 @@ ip_info4(){
 		city=${region}
 	fi
 
-	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${YELLOW}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
-	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+	echo -e " ASN & ISP            : $asn, $isp" | tee -a $log
+	echo -e " Organization         : $org" | tee -a $log
+	echo -e " Location             : $city, $country / $countryCode" | tee -a $log
+	echo -e " Region               : $region" | tee -a $log
 
 	rm -rf tools.py
 	rm -rf ip_json.json
@@ -436,7 +414,7 @@ power_time_check(){
 	echo -ne " Power time of disk   : "
 	install_smart
 	ptime=$(power_time)
-	echo -e "${SKYBLUE}$ptime Hours${PLAIN}"
+	echo -e "$ptime Hours"
 }
 
 freedisk() {
@@ -480,13 +458,13 @@ print_io() {
 	if [[ $writemb != "1" ]]; then
 		echo -n " I/O Speed( $writemb_size )   : " | tee -a $log
 		io1=$( io_test $writemb )
-		echo -e "${YELLOW}$io1${PLAIN}" | tee -a $log
+		echo -e "$io1" | tee -a $log
 		echo -n " I/O Speed( $writemb_size )   : " | tee -a $log
 		io2=$( io_test $writemb )
-		echo -e "${YELLOW}$io2${PLAIN}" | tee -a $log
+		echo -e "$io2" | tee -a $log
 		echo -n " I/O Speed( $writemb_size )   : " | tee -a $log
 		io3=$( io_test $writemb )
-		echo -e "${YELLOW}$io3${PLAIN}" | tee -a $log
+		echo -e "$io3" | tee -a $log
 		ioraw1=$( echo $io1 | awk 'NR==1 {print $1}' )
 		[ "`echo $io1 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
 		ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
@@ -495,24 +473,24 @@ print_io() {
 		[ "`echo $io3 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw3=$( awk 'BEGIN{print '$ioraw3' * 1024}' )
 		ioall=$( awk 'BEGIN{print '$ioraw1' + '$ioraw2' + '$ioraw3'}' )
 		ioavg=$( awk 'BEGIN{printf "%.1f", '$ioall' / 3}' )
-		echo -e " Average I/O Speed    : ${YELLOW}$ioavg MB/s${PLAIN}" | tee -a $log
+		echo -e " Average I/O Speed    : $ioavg MB/s" | tee -a $log
 	else
-		echo -e " ${RED}Not enough space!${PLAIN}"
+		echo -e " Not enough space!"
 	fi
 }
 
 print_system_info() {
-	echo -e " CPU Model            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
-	echo -e " CPU Cores            : ${YELLOW}$cores Cores ${SKYBLUE}@ $freq MHz $arch${PLAIN}" | tee -a $log
-	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
-	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${YELLOW}$virtual${PLAIN}" | tee -a $log
-	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
-	echo -e " Total Space          : ${SKYBLUE}$disk_used_size GB / ${YELLOW}$disk_total_size GB ${PLAIN}" | tee -a $log
-	echo -e " Total RAM            : ${SKYBLUE}$uram MB / ${YELLOW}$tram MB ${SKYBLUE}($bram MB Buff)${PLAIN}" | tee -a $log
-	echo -e " Total SWAP           : ${SKYBLUE}$uswap MB / $swap MB${PLAIN}" | tee -a $log
-	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
-	echo -e " Load Average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
-	echo -e " TCP CC               : ${YELLOW}$tcpctrl${PLAIN}" | tee -a $log
+	echo -e " CPU Model            : $cname" | tee -a $log
+	echo -e " CPU Cores            : $cores Cores @ $freq MHz $arch" | tee -a $log
+	echo -e " CPU Cache            : $corescache " | tee -a $log
+	echo -e " OS                   : $opsy ($lbit Bit) $virtual" | tee -a $log
+	echo -e " Kernel               : $kern" | tee -a $log
+	echo -e " Total Space          : $disk_used_size GB / $disk_total_size GB " | tee -a $log
+	echo -e " Total RAM            : $uram MB / $tram MB ($bram MB Buff)" | tee -a $log
+	echo -e " Total SWAP           : $uswap MB / $swap MB" | tee -a $log
+	echo -e " Uptime               : $up" | tee -a $log
+	echo -e " Load Average         : $load" | tee -a $log
+	echo -e " TCP CC               : $tcpctrl" | tee -a $log
 }
 
 print_end_time() {
@@ -573,19 +551,13 @@ get_system_info() {
 	virt_check
 }
 
-print_intro() {
-	printf ' Speedtest.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.9 | tee -a $log
-	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
-}
-
 sharetest() {
 	echo " Share result:" | tee -a $log
 	echo " · $result_speed" | tee -a $log
 	log_preupload
 	case $1 in
 	'ubuntu')
-		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
+		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=speedtest.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
 			grep "Location" | awk '{print $3}' );;
 	'haste' )
 		share_link=$( curl -X POST -s -d "$(cat $log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
@@ -630,18 +602,15 @@ pingtest() {
 cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
-	rm -f fast_com*;
 	rm -f tools.py;
 	rm -f ip_json.json
 }
 
 bench_all(){
 	mode_name="Standard"
-	about;
+	print_intro;
 	benchinit;
 	clear
-	next;
-	print_intro;
 	next;
 	get_system_info;
 	print_system_info;
