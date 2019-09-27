@@ -209,7 +209,7 @@ speed_test(){
 }
 
 print_speedtest() {
-	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
+	printf "%-24s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
         speed_test '' 'Speedtest.net           '
 	speed_test '17398' 'Ukraine, Lviv (Kopiyka) '
 	speed_test '27137' 'Ukraine, Lviv (Domino)  '
@@ -616,7 +616,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 1 -c 1 $1 | grep 'rtt' | cut -d"/" -f5 )
+	local ping_ms=$( ping -w 5 -c 3 q $1 | cut -d "/" -s -f4 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
