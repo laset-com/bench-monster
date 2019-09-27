@@ -12,7 +12,7 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.7 (27 Sep 2019)                 / "
+	echo " \                  v1.0.8 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
@@ -192,7 +192,7 @@ speed_test(){
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
 	        local relatency=$(pingtest $3)
-	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+	        #temp=$(echo "$relatency" | awk -F '.' '{print $1}')
         	#if [[ ${temp} -gt 1000 ]]; then
             	#relatency=" - "
         	#fi
@@ -209,7 +209,7 @@ speed_test(){
 }
 
 print_speedtest() {
-	printf "%-22s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
+	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
         speed_test '' 'Speedtest.net           '
 	speed_test '17398' 'Ukraine, Lviv (Kopiyka) '
 	speed_test '27137' 'Ukraine, Lviv (Domino)  '
@@ -225,7 +225,7 @@ print_speedtest() {
 }
 
 print_speedtest_fast() {
-	printf "%-22s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
+	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
         speed_test '' 'Speedtest.net           '
 	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
 	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) '
