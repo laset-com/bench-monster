@@ -538,7 +538,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Speedtest.sh -- https://bench.monster/speedtest.html \n' | tee -a $log
-	printf ' Mode  : $mode_name    Version : 1.1.5 \n' | tee -a $log
+	printf " Mode  : %s    Version : %s\n" $mode_name 1.1.5 | tee -a $log
 	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
