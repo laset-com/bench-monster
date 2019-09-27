@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.2.9 beta  (26 Sep 2019)             / "
+	echo "  \               V 1.3.0 beta  (27 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.2.9 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.3.0 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -121,17 +121,19 @@ systeminfo () {
 		pos=$(expr index "$so" 123456789)
 		so=${so/\/}
 		extra=""
-		if [[ "$so" == Debian*9* ]]; then
-			extra="(stretch)"
+		if [[ "$so" == Debian*10* ]]; then
+			extra="(Buster)"
+		elif [[ "$so" == Debian*9* ]]; then
+			extra="(Stretch)"
 		elif [[ "$so" == Debian*8* ]]; then
-			extra="(jessie)"
+			extra="(Jessie)"
 		elif [[ "$so" == Debian*7* ]]; then
-			extra="(wheezy)"
+			extra="(Wheezy)"
 		elif [[ "$so" == Debian*6* ]]; then
-			extra="(squeeze)"
+			extra="(Squeeze)"
 		fi
 		if [[ "$so" == *Proxmox* ]]; then
-			so="Debian 7.6 (wheezy)";
+			so="Debian 7.6 (Wheezy)";
 		fi
 		otro=$(expr index "$so" \S)
 		if [[ "$otro" == 2 ]]; then
@@ -241,7 +243,7 @@ systeminfo () {
 	elif [[ $secs -lt 3600 ]]; then
 		sysuptime=$( printf '%d minutes %d seconds\n' $((secs%3600/60)) $((secs%60)) )
 	elif [[ $secs -lt 86400 ]]; then
-		sysuptime=$( printf '%dhrs %dmin %dsec\n' $((secs/3600)) $((secs%3600/60)) $((secs%60)) )
+		sysuptime=$( printf '%d hrs %d min %d sec\n' $((secs/3600)) $((secs%3600/60)) $((secs%60)) )
 	else
 		sysuptime=$( echo $((secs/86400))" days - "$(date -d "1970-01-01 + $secs seconds" "+%Hhrs %Mmin %Ssec") )
 	fi
@@ -337,7 +339,7 @@ northamericaspeedtest () {
 	echo ""
 }
 
-# 20 location (2000MB)
+# 24 locations
 europespeedtest () {
 	echo "" | tee -a $log
 	echostyle "## Europe Speedtest"
@@ -360,6 +362,7 @@ europespeedtest () {
 	speed "Russia, Moscow (FoxCloud)       :" "http://94.103.12.105/100.mb"
 	speed "Russia, St.Petersburg (Hexcore) :" "http://92.255.99.30/100.mb"
 	speed "Lithuania, Siauliai (UltraVPS)  :" "http://lg.sqq.lt.ultravps.eu/100MB.test"
+	speed "Ukraine, Kyiv (KyivStar)        :" "http://speedtest.kyivstar.ua/speedtest/random4000x4000.jpg"
 	speed "Moldova, Chisinau (ClouDedic)   :" "http://185.153.198.20/100.mb"
 	speed "Romania, Bucharest (HostSailor) :" "http://185.183.99.8/LookingGlass/100MB.test"
 	speed "Bulgaria, Sofia (AlphaVPS)      :" "http://lgbg.alphavps.bg/100MB.test"
@@ -368,7 +371,7 @@ europespeedtest () {
 	echo "" | tee -a $log
 }
 
-# 10 location (500MB)
+# 23 locations
 ukrainespeedtest () {
 	echo "" | tee -a $log
 	echostyle "## Ukraine Speedtest"
@@ -399,7 +402,7 @@ ukrainespeedtest () {
 	echo "" | tee -a $log
 }
 
-# 14 location (800MB)
+# 16 locations
 asiaspeedtest () {
 	echo "" | tee -a $log
 	echostyle "## Asia & Pacific Speedtest"
@@ -423,7 +426,7 @@ asiaspeedtest () {
 	echo "" | tee -a $log
 }
 
-# 8 location (250MB)
+# 10 locations
 southamericaspeedtest () {
 	echo "" | tee -a $log
 	echostyle "## South America Speedtest"
@@ -441,7 +444,7 @@ southamericaspeedtest () {
 	echo "" | tee -a $log
 }
 
-# 8 location (600MB)
+# 8 locations
 morespeedtest () {
 	echo "" | tee -a $log
 	echostyle "## More locations Speedtest"
