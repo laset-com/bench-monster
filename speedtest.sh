@@ -540,9 +540,9 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' Speedtest.sh -> https://bench.monster/speedtest.html \n' | tee -a $log
-	printf " Mode  : %s    Version : %s\n" $mode_name 1.1.6 | tee -a $log
-	printf " wget bench.monster/speedtest.sh -O speedtest.sh && bash speedtest.sh -%s\n" $mode_name | tee -a $log
+	printf ' Speedtest Monster -> https://bench.monster/speedtest.html \n' | tee -a $log
+	printf " Region : %s    Version : %s\n" $mode_name 1.1.6 | tee -a $log
+	printf " sh speedtest.sh -%s\n" $mode_name | tee -a $log
 }
 
 sharetest() {
