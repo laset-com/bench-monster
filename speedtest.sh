@@ -6,15 +6,9 @@ about() {
 	echo " \                      Bench.Monster                    / "
 	echo " \         https://bench.monster/speedtest.html          / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.4 (27 Sep 2019)                 / "
+	echo " \                  v1.1.5 (27 Sep 2019)                 / "
 	echo " ========================================================= "
 	echo ""
-}
-
-print_intro() {
-	printf ' Speedtest.sh -- https://bench.monster/speedtest.html \n' | tee -a $log
-	printf ' Mode  : $mode_name    Version : 1.1.4 \n' | tee -a $log
-	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
 cancel() {
@@ -547,6 +541,12 @@ get_system_info() {
 	#disk_used_size=$(echo $tmp | sed s/G//)
 
 	virt_check
+}
+
+print_intro() {
+	printf ' Speedtest.sh -- https://bench.monster/speedtest.html \n' | tee -a $log
+	printf ' Mode  : $mode_name    Version : 1.1.5 \n' | tee -a $log
+	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
 sharetest() {
