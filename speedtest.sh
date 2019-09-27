@@ -6,7 +6,7 @@ about() {
 	echo " \                      Bench.Monster                    / "
 	echo " \         https://bench.monster/speedtest.html          / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.5 (27 Sep 2019)                 / "
+	echo " \                  v1.1.6 (27 Sep 2019)                 / "
 	echo " ========================================================= "
 	echo ""
 }
@@ -151,7 +151,7 @@ get_opsy() {
 }
 
 next() {
-    printf "%-70s\n" "-" | sed 's/\s/-/g' | tee -a $log
+    printf "%-75s\n" "-" | sed 's/\s/-/g' | tee -a $log
 }
 
 speed_test(){
@@ -215,13 +215,16 @@ print_speedtest() {
 	rm -rf speedtest.py
 }
 
-print_speedtest_fast() {
+print_speedtest_ukraine() {
 	printf "%-26s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
         speed_test '' 'Speedtest.net           '
-	speed_test '14887' 'Ukraine, Lviv (UARNet)  '
-	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) '
-	speed_test '1204' 'Ukraine, Lviv (Network) '
-	speed_test '12786' 'Ukraine, Lviv (ASTRA)   '
+	speed_test '14887' 'Ukraine, Lviv (UARNet)  ' 'http://speedtest.uar.net'
+	speed_test '2445' 'Ukraine, Lviv (KOMiTEX) ' 'http://speedtest.komitex.net'
+	speed_test '12786' 'Ukraine, Lviv (ASTRA)   ' 'http://speedtest.astra.in.ua'
+	speed_test '17398' 'Ukraine, Lviv (Kopiyka) ' 'http://speedtest.kopiyka.org'
+	speed_test '6225' 'Ukraine, Lviv (ZNet)    ' 'http://178.212.102.70'
+	speed_test '1204' 'Ukraine, Lviv (Network) ' 'http://speedtest.network.lviv.ua'
+	speed_test '21900' 'Ukraine, Lviv (LimNet)  ' 'http://speedtest.limnet.com.ua'
 	 
 	rm -rf speedtest.py
 }
@@ -526,7 +529,7 @@ get_system_info() {
 	disk_total_size=$( calc_disk ${disk_size1[@]} )
 	disk_used_size=$( calc_disk ${disk_size2[@]} )
 	#tcp congestion control
-	tcpctrl=$( sysctl net.ipv4.tcp_congestion_control | awk -F ' ' '{print $3}' )
+	#tcpctrl=$( sysctl net.ipv4.tcp_congestion_control | awk -F ' ' '{print $3}' )
 
 	#tmp=$(python tools.py disk 0)
 	#disk_total_size=$(echo $tmp | sed s/G//)
@@ -537,9 +540,9 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' Speedtest.sh -- https://bench.monster/speedtest.html \n' | tee -a $log
-	printf " Mode  : %s    Version : %s\n" $mode_name 1.1.5 | tee -a $log
-	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
+	printf ' Speedtest.sh -> https://bench.monster/speedtest.html \n' | tee -a $log
+	printf " Mode  : %s    Version : %s\n" $mode_name 1.1.6 | tee -a $log
+	printf " wget bench.monster/speedtest.sh -O speedtest.sh && bash speedtest.sh -%s\n" $mode_name | tee -a $log
 }
 
 sharetest() {
@@ -618,21 +621,20 @@ bench_all(){
 	sharetest clbin;
 }
 
-fast_bench(){
-	mode_name="Fast"
-	about;
+ukraine_bench(){
+	mode_name="Ukraine"
+	print_intro;
+	next;
 	benchinit;
 	clear
-	next;
-	print_intro;
 	next;
 	get_system_info;
 	print_system_info;
 	ip_info4;
 	next;
-	print_io fast;
+	print_io;
 	next;
-	print_speedtest_fast;
+	print_speedtest_ukraine;
 	next;
 	print_end_time;
 	next;
@@ -660,8 +662,8 @@ case $1 in
 		bench_all;;
 	'about'|'-about'|'--about' )
 		about;;
-	'fast'|'-f'|'--f'|'-fast'|'--fast' )
-		fast_bench;;
+	'ukraine'|'-ua'|'--ua'|'-ukraine'|'--ukraine' )
+		ukraine_bench;;
 	'share'|'-s'|'--s'|'-share'|'--share' )
 		bench_all;
 		is_share="share"
