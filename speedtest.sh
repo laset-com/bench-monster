@@ -210,7 +210,7 @@ print_speedtest() {
 	speed_test '17398' 'Ukraine, Lviv (Kopiyka) ' 'http://speedtest.kopiyka.org'
 	speed_test '6225' 'Ukraine, Lviv (ZNet)    ' 'http://178.212.102.70'
 	speed_test '1204' 'Ukraine, Lviv (Network) ' 'http://speedtest.network.lviv.ua'
-	speed_test '21900' 'Ukraine, Lviv (LimNet) ' 'http://speedtest.limnet.com.ua'
+	speed_test '21900' 'Ukraine, Lviv (LimNet)  ' 'http://speedtest.limnet.com.ua'
 	 
 	rm -rf speedtest.py
 }
@@ -498,15 +498,8 @@ print_end_time() {
 	#echo -ne "\n Current time : "
 	#echo $(date +%Y-%m-%d" "%H:%M:%S)
 	printf '\n' | tee -a $log
-	#utc_time=$(date -u '+%F %T')
-	#bj_time=$(date +%Y-%m-%d" "%H:%M:%S -d '+8 hours')
-	bj_time=$(curl -s http://cgi.im.qq.com/cgi-bin/cgi_svrtime)
-	#utc_time=$(date +"$bj_time" -d '-8 hours')
-
-	if [[ $(echo $bj_time | grep "html") ]]; then
-		bj_time=$(date -u +%Y-%m-%d" "%H:%M:%S -d '+8 hours')
-	fi
-	echo " Timestamp    : $bj_time GMT+8" | tee -a $log
+	utc_time=$(date -u '+%F %T')
+	echo " Timestamp    : $utc_time UTC" | tee -a $log
 	#echo " Finished!"
 	echo " Results      : $log"
 }
