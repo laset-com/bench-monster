@@ -616,7 +616,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 5 -c 3 q $1 | cut -d "/" -s -f4 )
+	local ping_ms=$( ping -w 5 -c 3 $1 | cut -d "/" -s -f4 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
