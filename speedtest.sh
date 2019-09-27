@@ -361,17 +361,6 @@ virt_check(){
 	fi
 
 	virtualx=$(dmesg) 2>/dev/null
-
-	# check dmidecode cmd
-	if  [ $(which dmidecode) ]; then
-		sys_manu=$(dmidecode -s system-manufacturer) 2>/dev/null
-		sys_product=$(dmidecode -s system-product-name) 2>/dev/null
-		sys_ver=$(dmidecode -s system-version) 2>/dev/null
-	else
-		sys_manu=""
-		sys_product=""
-		sys_ver=""
-	fi
 	
 	if grep docker /proc/1/cgroup -qa; then
 	    virtual="Docker"
