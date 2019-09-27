@@ -245,7 +245,7 @@ systeminfo () {
 	elif [[ $secs -lt 86400 ]]; then
 		sysuptime=$( printf '%d hrs %d min %d sec\n' $((secs/3600)) $((secs%3600/60)) $((secs%60)) )
 	else
-		sysuptime=$( echo $((secs/86400))" days - "$(date -d "1970-01-01 + $secs seconds" "+%Hhrs %Mmin %Ssec") )
+		sysuptime=$( echo $((secs/86400))" days - "$(date -d "1970-01-01 + $secs seconds" "+%H hrs %M min %S sec") )
 	fi
 	echo " Running for : $sysuptime" | tee -a $log
 	echo "" | tee -a $log
@@ -281,7 +281,7 @@ FormatBytes() {
 pingtest() {
 	# ping one time
 	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
-	local ping_ms=$( ping -w1 -c1 $ping_link | grep 'rtt' | cut -d"/" -f5 )
+	local ping_ms=$( ping -w1 -c1 $ping_link | grep 'rtt' | cut -d"/" -f3 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
@@ -426,12 +426,11 @@ asiaspeedtest () {
 	echo "" | tee -a $log
 }
 
-# 10 locations
+# 9 locations
 southamericaspeedtest () {
 	echo "" | tee -a $log
 	echostyle "## South America Speedtest"
 	echo "" | tee -a $log
-	speed "Brazil, Uberlandia (DignusData) :" "http://177.54.144.150/100.mb"
 	speed "Brazil, Sao Paulo (SoftLayer)   :" "http://sao.speedtest.net/speedtest/random4000x4000.jpg"
 	speed "Brazil, Fortaleza (SUPERLINK)   :" "http://sao.speedtest.net/speedtest/random4000x4000.jpg"
 	speed "Colombia, Bogota (UFINET)       :" "http://speedtest-bog.ufinet.com.co/speedtest/random4000x4000.jpg"
