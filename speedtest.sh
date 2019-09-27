@@ -12,7 +12,7 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.6 (27 Sep 2019)                 / "
+	echo " \                  v1.0.7 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
@@ -194,7 +194,7 @@ speed_test(){
 	        local relatency=$(pingtest $3)
 	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
         	#if [[ ${temp} -gt 1000 ]]; then
-            	relatency=" - "
+            	#relatency=" - "
         	#fi
 	        local nodeName=$2
 
@@ -574,8 +574,8 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' Speedbench.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.5 | tee -a $log
+	printf ' Speedtest.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.7 | tee -a $log
 	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
@@ -602,9 +602,9 @@ sharetest() {
 }
 
 log_preupload() {
-	log_up="$HOME/superbench_upload.log"
+	log_up="$HOME/speedtest_upload.log"
 	true > $log_up
-	$(cat superbench.log 2>&1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > $log_up)
+	$(cat speedtest.log 2>&1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > $log_up)
 }
 
 get_ip_whois_org_name(){
@@ -616,7 +616,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w5 -c3 $1 | cut -d "/" -s -f4 )
+	local ping_ms=$( ping -w 4 -c 3 $1 | grep 'rtt' | cut -d"/" -f4 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
