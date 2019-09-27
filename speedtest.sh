@@ -12,7 +12,7 @@ about() {
 	echo " ========================================================= "
 	echo " \           https://bench.monster/speedtest.sh         / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.8 (27 Sep 2019)                 / "
+	echo " \                  v1.0.9 (27 Sep 2019)                 / "
 	echo " \                      Bench.Monster                    / "
 	echo " ========================================================= "
 	echo ""
@@ -575,7 +575,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Speedtest.sh -- https://bench.monster/speedtest.sh \n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.7 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.9 | tee -a $log
 	printf ' Usage : wget -qO- bench.monster/speedtest.sh  | bash\n' | tee -a $log
 }
 
@@ -616,7 +616,7 @@ get_ip_whois_org_name(){
 }
 
 pingtest() {
-	local ping_ms=$( ping -w 4 -c 3 $1 | grep 'rtt' | cut -d"/" -f4 )
+	local ping_ms=$( ping -w 1 -c 1 $1 | grep 'rtt' | cut -d"/" -f5 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
