@@ -6,7 +6,7 @@ about() {
 	echo " \                      Bench.Monster                    / "
 	echo " \         https://bench.monster/speedtest.html          / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.6 (27 Sep 2019)                 / "
+	echo " \                  v1.1.7 (27 Sep 2019)                 / "
 	echo " ========================================================= "
 	echo ""
 }
@@ -541,8 +541,8 @@ get_system_info() {
 
 print_intro() {
 	printf ' Speedtest Monster -> https://bench.monster/speedtest.html \n' | tee -a $log
-	printf " Region : %s    Version : %s\n" $mode_name 1.1.6 | tee -a $log
-	printf " sh speedtest.sh -%s\n" $mode_name | tee -a $log
+	printf " Region: %s    Version: %s\n" $mode_name 1.1.7 | tee -a $log
+	printf " curl -LsO bench.monster/speedtest.sh; sh speedtest.sh -%s\n" $mode_name | tee -a $log
 }
 
 sharetest() {
