@@ -281,7 +281,7 @@ FormatBytes() {
 pingtest() {
 	# ping one time
 	local ping_link=$( echo ${1#*//} | cut -d"/" -f1 )
-	local ping_ms=$( ping -w1 -c3 -q $ping_link | cut -d "/" -s -f5 )
+	local ping_ms=$( ping -w 1 -c 1 -q $ping_link | cut -d "/" -s -f5 )
 
 	# get download speed and print
 	if [[ $ping_ms == "" ]]; then
