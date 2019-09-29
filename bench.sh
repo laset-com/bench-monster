@@ -7,7 +7,7 @@ about () {
 	echo "  ========================================================= "
 	echo "  \        Bench.Monster - Server Benchmark Script        / "
 	echo "  \       Basic system info, I/O test and speedtest       / "
-	echo "  \               V 1.3.0 beta  (27 Sep 2019)             / "
+	echo "  \               V 1.3.1 beta  (29 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
 	echo "  \                  https://bench.monster                / "
 	echo "  ========================================================= "
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.3.0 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.3.1 -> https://bench.monster" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
@@ -364,9 +364,9 @@ europespeedtest () {
 	speed "Lithuania, Siauliai (UltraVPS)  :" "http://lg.sqq.lt.ultravps.eu/100MB.test"
 	speed "Ukraine, Kyiv (KyivStar)        :" "http://speedtest.kyivstar.ua/speedtest/random4000x4000.jpg"
 	speed "Moldova, Chisinau (ClouDedic)   :" "http://185.153.198.20/100.mb"
-	speed "Romania, Bucharest (HostSailor) :" "http://185.183.99.8/LookingGlass/100MB.test"
+	speed "Romania, Bucharest (Orange)     :" "http://speedtestbuc.orangero.net/speedtest/random4000x4000.jpg"
 	speed "Bulgaria, Sofia (AlphaVPS)      :" "http://lgbg.alphavps.bg/100MB.test"
-	speed "Greece, Athens (Top.Host)       :" "http://speedtest.top.host/speedtest/random4000x4000.jpg"
+	speed "Greece, Athens (GRNET)          :" "http://speed-test.gr-ix.gr/speedtest/random4000x4000.jpg"
 	speed "Turkey, Istanbul (Radore)       :" "http://speedtest.radore.com/speedtest/random4000x4000.jpg"
 	echo "" | tee -a $log
 }
