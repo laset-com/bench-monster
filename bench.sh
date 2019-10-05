@@ -432,7 +432,7 @@ southamericaspeedtest () {
 	echostyle "## South America Speedtest"
 	echo "" | tee -a $log
 	speed "Brazil, Sao Paulo (SoftLayer)   :" "http://sao.speedtest.net/speedtest/random4000x4000.jpg"
-	speed "Brazil, Fortaleza (SUPERLINK)   :" "http://sao.speedtest.net/speedtest/random4000x4000.jpg"
+	speed "Brazil, Fortaleza (Claro)       :" "http://spd1.claro.com.br/speedtest/random4000x4000.jpg"
 	speed "Colombia, Bogota (UFINET)       :" "http://speedtest-bog.ufinet.com.co/speedtest/random4000x4000.jpg"
 	speed "Ecuador, Quito (Iplanet)        :" "http://sp1.iplanet.ec/speedtest/random4000x4000.jpg"
 	speed "Peru, Lima (Entel)              :" "http://speedtest.entel.net.pe/speedtest/random4000x4000.jpg"
