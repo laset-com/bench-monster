@@ -9,7 +9,7 @@ about () {
 	echo "  \       Basic system info, I/O test and speedtest       / "
 	echo "  \               V 1.3.1 beta  (29 Sep 2019)             / "
 	echo "  \       https://github.com/laset-com/bench-monster      / "
-	echo "  \                  https://bench.monster                / "
+	echo "  \             https://bench.monster/bench.html          / "
 	echo "  ========================================================= "
 	echo ""
 }
@@ -58,7 +58,7 @@ benchinit() {
 	fi
 
 echo "=================================================" | tee -a $log
-echo "  Bench.Monster v1.3.1 -> https://bench.monster" | tee -a $log
+echo "  Bench.Monster v1.3.1 -> https://bench.monster/bench.html" | tee -a $log
 benchstart=$(date +"%d-%b-%Y %H:%M:%S")
 	start_seconds=$(date +%s)
 echo "  Benchmark timestamp:    $benchstart" | tee -a $log
